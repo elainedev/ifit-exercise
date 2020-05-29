@@ -1,0 +1,20 @@
+body {
+  margin: 0;
+  border-bottom: 1px solid #D5D6D6;
+  font-family: "Open Sans", sans-serif;
+}
+
+.top-nav-bar {
+  display: flex;
+}
+.top-nav-bar .item {
+  padding: 12px 25px;
+  border-right: 1px solid #D5D6D6;
+  letter-spacing: 1px;
+  font-family: Helvetica, sans-serif;
+  font-size: 14px;
+  color: rgba(46, 49, 52, 0.8);
+  text-transform: uppercase;
+}
+
+/*# sourceMappingURL=style.css.map */

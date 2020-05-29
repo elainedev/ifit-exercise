@@ -25,13 +25,40 @@ var IFitPage = function (_React$Component) {
 			return React.createElement(
 				"div",
 				null,
-				"ice cream"
+				React.createElement(UpperNavBar, null),
+				React.createElement(MainNavBar, null)
 			);
 		}
 	}]);
 
 	return IFitPage;
 }(React.Component);
+
+function UpperNavBar() {
+	return React.createElement(
+		"div",
+		{ className: "top-nav-bar" },
+		React.createElement(
+			"div",
+			{ className: "item" },
+			"Blog"
+		),
+		React.createElement(
+			"div",
+			{ className: "item" },
+			"Nourish"
+		),
+		React.createElement(
+			"div",
+			{ className: "item" },
+			"Shop"
+		)
+	);
+}
+
+function MainNavBar(props) {
+	return React.createElement("div", null);
+}
 
 var domContainer = document.querySelector("#ifit-page");
 ReactDOM.render(React.createElement(IFitPage, null), domContainer);
