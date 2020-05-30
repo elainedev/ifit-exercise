@@ -32,7 +32,20 @@ function UpperNavBar() {
 
 function MainNavBar(props) {
 	return (
-		<div></div>
+		<div className="main-nav-bar">
+			<div className="ifit-brand-wrap absolute">
+				<img className="brand-logo" src="logos/ifit-coach-logo.svg" />
+			</div>
+			<div className="main-nav-wrap">
+				<div className="item">Exercise</div>
+				<div className="item">Nutrition</div>
+				<div className="item">Activity</div>
+				<div className="item">Sleep</div>
+			</div>
+			<div className="sign-up-button absolute">
+				Sign Up
+			</div> 
+		</div>
 	)
 }
 

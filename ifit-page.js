@@ -57,7 +57,44 @@ function UpperNavBar() {
 }
 
 function MainNavBar(props) {
-	return React.createElement("div", null);
+	return React.createElement(
+		"div",
+		{ className: "main-nav-bar" },
+		React.createElement(
+			"div",
+			{ className: "ifit-brand-wrap absolute" },
+			React.createElement("img", { className: "brand-logo", src: "logos/ifit-coach-logo.svg" })
+		),
+		React.createElement(
+			"div",
+			{ className: "main-nav-wrap" },
+			React.createElement(
+				"div",
+				{ className: "item" },
+				"Exercise"
+			),
+			React.createElement(
+				"div",
+				{ className: "item" },
+				"Nutrition"
+			),
+			React.createElement(
+				"div",
+				{ className: "item" },
+				"Activity"
+			),
+			React.createElement(
+				"div",
+				{ className: "item" },
+				"Sleep"
+			)
+		),
+		React.createElement(
+			"div",
+			{ className: "sign-up-button absolute" },
+			"Sign Up"
+		)
+	);
 }
 
 var domContainer = document.querySelector("#ifit-page");

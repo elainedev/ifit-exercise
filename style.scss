@@ -1,14 +1,17 @@
+$font-gray: rgba(46,49,52,0.80);
 $light-gray: #D5D6D6;
 $default-font: 'Open Sans', sans-serif;
+$ifit-blue: #0069D2;
 
 body {
 	margin: 0;
-	border-bottom: 1px solid $light-gray;
+	
 	font-family: $default-font;
 }
 
 .top-nav-bar {
 	display: flex;
+	border-bottom: 1px solid $light-gray;
 
 	.item {
 		padding: 12px 25px;
@@ -16,9 +19,64 @@ body {
 		letter-spacing: 1px;
 		font-family: Helvetica, sans-serif;
 		font-size: 14px;
-		color: rgba(46,49,52,0.80);
+		color: $font-gray;
 		text-transform: uppercase;
+		cursor: pointer;
 	}
 }
 
+.main-nav-bar {
+	height: 50px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	position: relative;
+	font-family: Helvetica, sans-serif;
+	font-size: 14px;
+	min-width: 760px;
+	
+	.absolute {
+		position: absolute;
+	}
+
+	.ifit-brand-wrap {
+		left: 25px;
+		height: 100%;
+		display: flex;
+		align-items: center;
+		
+		.brand-logo {
+			width: 80%;
+		}
+	}
+
+	.main-nav-wrap {
+		display: flex;
+		color: $font-gray;
+		
+		.item {
+			text-transform: uppercase;
+			padding: 0 20px;
+			cursor: pointer;
+		}
+	}
+
+	.sign-up-button {
+		padding: 10px;
+		right: 25px;
+		text-transform: uppercase;
+		background-color: $ifit-blue;
+		border-radius: 4px;
+		color: white;
+		letter-spacing: 0.5px;
+		box-shadow: 0 1px 2px 0 rgba(46,49,52,0.40);
+		line-height: 16px;
+	}
+}
+
+
+
+
+
 // background-image: linear-gradient(135deg, #0069D2 0%, #28E1A5 100%);
+
