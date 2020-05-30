@@ -13,6 +13,7 @@ class IFitPage extends React.Component {
 			<div>
 				<UpperNavBar />
 				<MainNavBar />
+				<HeroImageSection />
 			</div>
 		)
 	}
@@ -30,7 +31,7 @@ function UpperNavBar() {
 	);
 }
 
-function MainNavBar(props) {
+function MainNavBar() {
 	return (
 		<div className="main-nav-bar">
 			<div className="ifit-brand-wrap absolute">
@@ -45,6 +46,15 @@ function MainNavBar(props) {
 			<div className="sign-up-button absolute">
 				Sign Up
 			</div> 
+		</div>
+	)
+}
+
+function HeroImageSection() {
+	return (
+		<div className="hero-image-section">
+			<img src="img/hero-image.png" />
+			<div>text</div>
 		</div>
 	)
 }

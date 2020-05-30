@@ -61,4 +61,19 @@ body {
   line-height: 16px;
 }
 
+.hero-image-section {
+  position: relative;
+  width: 100%;
+  padding-bottom: 42%;
+  overflow: hidden;
+  justify-content: center;
+  align-items: center;
+  background-color: pink;
+}
+.hero-image-section img {
+  position: absolute;
+  width: 100%;
+  top: -10%;
+}
+
 /*# sourceMappingURL=style.css.map */

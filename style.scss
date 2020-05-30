@@ -34,7 +34,7 @@ body {
 	font-family: Helvetica, sans-serif;
 	font-size: 14px;
 	min-width: 760px;
-	
+
 	.absolute {
 		position: absolute;
 	}
@@ -74,6 +74,41 @@ body {
 	}
 }
 
+.hero-image-section {
+	// font-size: 72px;
+	// box-shadow: 0 0 1px 0 rgba(0,0,0,0.12), 0 1px 1px 0 rgba(0,0,0,0.24);
+	position: relative;
+	width: 100%;
+	padding-bottom: 42%;
+	overflow: hidden;
+	justify-content: center;
+	align-items: center;
+	background-color: pink;
+
+	img {
+		position: absolute;
+		width: 100%;
+		top: -10%;
+	}
+}
+
+// .hero-image-section {
+// 	// font-size: 72px;
+// 	// box-shadow: 0 0 1px 0 rgba(0,0,0,0.12), 0 1px 1px 0 rgba(0,0,0,0.24);
+// 	position: relative;
+// 	width: 100%;
+// 	padding-bottom: 70%;
+// 	overflow: hidden;
+// 	justify-content: center;
+// 	align-items: center;
+// 	background-color: pink;
+
+// 	img {
+// 		position: absolute;
+// 		width: 100%;
+// 		// top: -10%;
+// 	}
+// }
 
 
 

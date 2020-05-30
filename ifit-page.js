@@ -26,7 +26,8 @@ var IFitPage = function (_React$Component) {
 				"div",
 				null,
 				React.createElement(UpperNavBar, null),
-				React.createElement(MainNavBar, null)
+				React.createElement(MainNavBar, null),
+				React.createElement(HeroImageSection, null)
 			);
 		}
 	}]);
@@ -56,7 +57,7 @@ function UpperNavBar() {
 	);
 }
 
-function MainNavBar(props) {
+function MainNavBar() {
 	return React.createElement(
 		"div",
 		{ className: "main-nav-bar" },
@@ -93,6 +94,19 @@ function MainNavBar(props) {
 			"div",
 			{ className: "sign-up-button absolute" },
 			"Sign Up"
+		)
+	);
+}
+
+function HeroImageSection() {
+	return React.createElement(
+		"div",
+		{ className: "hero-image-section" },
+		React.createElement("img", { src: "img/hero-image.png" }),
+		React.createElement(
+			"div",
+			null,
+			"text"
 		)
 	);
 }
