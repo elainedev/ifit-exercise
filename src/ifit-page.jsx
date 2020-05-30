@@ -43,18 +43,19 @@ function MainNavBar() {
 				<div className="item">Activity</div>
 				<div className="item">Sleep</div>
 			</div>
-			<div className="sign-up-button absolute">
+			<button className="sign-up-btn absolute">
 				Sign Up
-			</div> 
+			</button> 
 		</div>
 	)
 }
 
 function HeroImageSection() {
 	return (
-		<div className="hero-image-section">
-			{/*<img src="img/hero-image.png" />*/}
-			<div className="text">text</div>
+		<div className="hero-section">
+			<div className="darken-bg"/>
+			<div className="hero-heading">The best personal training,<br/>right in your own home</div>
+			<button className="join-btn">JOIN IFIT COACH</button>
 		</div>
 	)
 }

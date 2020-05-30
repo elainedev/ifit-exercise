@@ -91,8 +91,8 @@ function MainNavBar() {
 			)
 		),
 		React.createElement(
-			"div",
-			{ className: "sign-up-button absolute" },
+			"button",
+			{ className: "sign-up-btn absolute" },
 			"Sign Up"
 		)
 	);
@@ -101,11 +101,19 @@ function MainNavBar() {
 function HeroImageSection() {
 	return React.createElement(
 		"div",
-		{ className: "hero-image-section" },
+		{ className: "hero-section" },
+		React.createElement("div", { className: "darken-bg" }),
 		React.createElement(
 			"div",
-			{ className: "text" },
-			"text"
+			{ className: "hero-heading" },
+			"The best personal training,",
+			React.createElement("br", null),
+			"right in your own home"
+		),
+		React.createElement(
+			"button",
+			{ className: "join-btn" },
+			"JOIN IFIT COACH"
 		)
 	);
 }

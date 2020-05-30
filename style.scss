@@ -58,11 +58,12 @@ body {
 			text-transform: uppercase;
 			padding: 0 20px;
 			cursor: pointer;
+			letter-spacing: 1px;
 		}
 	}
 
-	.sign-up-button {
-		padding: 10px;
+	.sign-up-btn {
+		padding: 8px 12px;
 		right: 25px;
 		text-transform: uppercase;
 		background-color: $ifit-blue;
@@ -71,39 +72,56 @@ body {
 		letter-spacing: 0.5px;
 		box-shadow: 0 1px 2px 0 rgba(46,49,52,0.40);
 		line-height: 16px;
+		border: none;
 	}
 }
 
-// .hero-image-section {
-// 	// font-size: 72px;
-// 	// box-shadow: 0 0 1px 0 rgba(0,0,0,0.12), 0 1px 1px 0 rgba(0,0,0,0.24);
-// 	position: relative;
-// 	width: 100%;
-// 	padding-bottom: 42%;
-// 	overflow: hidden;
-// 	justify-content: center;
-// 	align-items: center;
-// 	background-color: pink;
-
-// 	img {
-// 		position: absolute;
-// 		width: 100%;
-// 		top: -10%;
-// 		z-index: 0;
-// 	}
-
-// 	.text {
-// 		z-index: 100;
-// 	}
-// }
-
-.hero-image-section {
+.hero-section {
 	background: #A59D92 url("img/hero-image.png") no-repeat;
 	background-size: 100%;
 	background-position: center 16%;
 	width: 100%;
 	padding-bottom: 45%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	position: relative;
+	color: white;
+
+	.darken-bg {
+		position: absolute;
+		top: 0;
+		bottom: 0;
+		width: 100%;
+		background-color: rgba(0,0,0,0.25);
+	}
+
+	.hero-heading {
+		font-size: 4vw;
+		position: absolute;
+		top: 34%;
+		text-align: center;
+		font-family: Helvetica;
+		letter-spacing: 1px;
+		text-shadow: 2px 2px rgba(126, 126, 126, 0.2);
+		line-height: 1.2;
+	}
+
+	.join-btn {
+		color: white;
+		background-color: $ifit-blue;
+		font-size: 14px;
+		letter-spacing: 1px;
+		text-align: center;
+		border-radius: 4px;
+		padding: 1% 8%;
+		position: absolute;
+		top: 67%;
+		cursor: pointer;
+		border: none;
+	}
 }
+
 
 
 
