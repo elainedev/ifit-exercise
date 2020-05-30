@@ -53,8 +53,8 @@ function MainNavBar() {
 function HeroImageSection() {
 	return (
 		<div className="hero-image-section">
-			<img src="img/hero-image.png" />
-			<div>text</div>
+			{/*<img src="img/hero-image.png" />*/}
+			<div className="text">text</div>
 		</div>
 	)
 }

@@ -102,10 +102,9 @@ function HeroImageSection() {
 	return React.createElement(
 		"div",
 		{ className: "hero-image-section" },
-		React.createElement("img", { src: "img/hero-image.png" }),
 		React.createElement(
 			"div",
-			null,
+			{ className: "text" },
 			"text"
 		)
 	);

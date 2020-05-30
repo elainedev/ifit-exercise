@@ -62,18 +62,11 @@ body {
 }
 
 .hero-image-section {
-  position: relative;
+  background: #A59D92 url("img/hero-image.png") no-repeat;
+  background-size: 100%;
+  background-position: center 16%;
   width: 100%;
-  padding-bottom: 42%;
-  overflow: hidden;
-  justify-content: center;
-  align-items: center;
-  background-color: pink;
-}
-.hero-image-section img {
-  position: absolute;
-  width: 100%;
-  top: -10%;
+  padding-bottom: 45%;
 }
 
 /*# sourceMappingURL=style.css.map */
