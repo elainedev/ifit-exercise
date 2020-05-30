@@ -8,15 +8,24 @@ body {
 	font-family: $default-font;
 }
 
+.ifit-page {
+	.header {
+		position: fixed;
+		position: sticky;
+		top: 0;
+		z-index: 1000;
+	}
+}
 .top-nav-bar {
 	display: flex;
 	border-bottom: 1px solid $light-gray;
-
+	background-color: white;
+	
 	.item {
 		padding: 12px 25px;
 		border-right: 1px solid $light-gray;
 		letter-spacing: 1px;
-		// font-family: Helvetica, sans-serif;
+		font-family: Helvetica, sans-serif;
 		font-size: 14px;
 		color: $font-gray;
 		text-transform: uppercase;
@@ -33,6 +42,7 @@ body {
 	// font-family: Helvetica, sans-serif;
 	font-size: 14px;
 	min-width: 760px;
+	background-color: white;
 
 	.absolute {
 		position: absolute;
@@ -95,13 +105,13 @@ body {
 		background-color: rgba(0,0,0,0.25);
 	}
 
-	.hero-heading {
+	.hero-text {
 		font-size: 3.5vw;
 		position: absolute;
 		top: 34%;
 		text-align: center;
 		font-weight: 500;
-		letter-spacing: 1px;
+		letter-spacing: 2px;
 		text-shadow: 2px 2px rgba(126, 126, 126, 0.2);
 		line-height: 1.2;
 		-webkit-animation: focus-in-expand-fwd 1.5s 1s both;
