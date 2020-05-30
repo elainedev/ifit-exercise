@@ -14,19 +14,32 @@ var IFitPage = function (_React$Component) {
 
 		var _this = _possibleConstructorReturn(this, (IFitPage.__proto__ || Object.getPrototypeOf(IFitPage)).call(this, props));
 
-		_this.state = {};
+		_this.phoneSizeBreakpoint = 480;
+		_this.state = {
+			windowWidth: document.body.clientWidth
+		};
 		return _this;
 	}
 
 	_createClass(IFitPage, [{
+		key: "componentDidMount",
+		value: function componentDidMount() {
+			var _this2 = this;
+
+			window.addEventListener('resize', function () {
+				_this2.setState({ windowWidth: document.body.clientWidth });
+			});
+		}
+	}, {
 		key: "render",
 		value: function render() {
+			var windowWidth = this.state.windowWidth;
 
 			return React.createElement(
 				"div",
 				null,
 				React.createElement(UpperNavBar, null),
-				React.createElement(MainNavBar, null),
+				windowWidth > this.phoneSizeBreakpoint ? React.createElement(MainNavBar, null) : null,
 				React.createElement(HeroImageSection, null)
 			);
 		}

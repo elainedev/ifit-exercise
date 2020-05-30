@@ -2,17 +2,24 @@ class IFitPage extends React.Component {
 	
 	constructor(props) {
 		super(props);
+		this.phoneSizeBreakpoint = 480;
 		this.state = {
-
+			windowWidth: document.body.clientWidth
 		};
 	}
 
-	render() {
+	componentDidMount() {
+		window.addEventListener('resize', () => {
+			this.setState({windowWidth: document.body.clientWidth})
+		});
+	}
 
+	render() {
+		const {windowWidth} = this.state;
 		return (
 			<div>
 				<UpperNavBar />
-				<MainNavBar />
+				{windowWidth > this.phoneSizeBreakpoint ? <MainNavBar /> : null}
 				<HeroImageSection />
 			</div>
 		)

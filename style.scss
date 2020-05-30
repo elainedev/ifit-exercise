@@ -5,7 +5,6 @@ $ifit-blue: #0069D2;
 
 body {
 	margin: 0;
-	
 	font-family: $default-font;
 }
 
@@ -17,7 +16,7 @@ body {
 		padding: 12px 25px;
 		border-right: 1px solid $light-gray;
 		letter-spacing: 1px;
-		font-family: Helvetica, sans-serif;
+		// font-family: Helvetica, sans-serif;
 		font-size: 14px;
 		color: $font-gray;
 		text-transform: uppercase;
@@ -31,7 +30,7 @@ body {
 	justify-content: center;
 	align-items: center;
 	position: relative;
-	font-family: Helvetica, sans-serif;
+	// font-family: Helvetica, sans-serif;
 	font-size: 14px;
 	min-width: 760px;
 
@@ -102,7 +101,6 @@ body {
 		top: 34%;
 		text-align: center;
 		font-weight: 500;
-		// font-family: Helvetica;
 		letter-spacing: 1px;
 		text-shadow: 2px 2px rgba(126, 126, 126, 0.2);
 		line-height: 1.2;
@@ -153,6 +151,7 @@ body {
     opacity: 1;
   }
 }
+
 @keyframes focus-in-expand-fwd {
   0% {
     letter-spacing: -0.5em;
