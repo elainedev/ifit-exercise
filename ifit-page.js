@@ -69,7 +69,7 @@ var IFitPage = function (_React$Component) {
 
 			var showCompactNav = this.state.windowWidth < this.windowWidthBreakpoints.tablet;
 			var isPhoneSize = windowWidth < this.windowWidthBreakpoints.phone;
-			console.log(this.state.windowWidth, 'bah');
+
 			return React.createElement(
 				'div',
 				{ className: 'ifit-page' },
@@ -84,8 +84,7 @@ var IFitPage = function (_React$Component) {
 					)
 				),
 				React.createElement(HeroImageSection, { isBelowCompactNav: showCompactNav, tallerImage: isPhoneSize }),
-				React.createElement(ReviewsContainer, null),
-				'Lorem ipsum dolor sit amet, consectetur adipisicing elit. voluptatum. Culpa, nisi. Cumque quidem, velit itaque consequuntur facilis sequi numquam nisi voluptatum nemo? Quidem iure doloremque tenetur excepturi, nihil, quod vitae ab. Deserunt sequi porro rem autem minus, temporibus ipsa non. Laboriosam excepturi porro est asperiores, enim maxime quia velit eaque eum itaque aut facere corporis, optio, animi aliquid nulla numquam consequatur culpa pariatur coLorem500 Lorem1000'
+				React.createElement(ReviewsContainer, null)
 			);
 		}
 	}]);
@@ -298,27 +297,62 @@ function HeroImageSection(props) {
 	);
 }
 
-function ReviewsContainer(props) {
+var ReviewsContainer = function (_React$Component3) {
+	_inherits(ReviewsContainer, _React$Component3);
+
+	function ReviewsContainer(props) {
+		_classCallCheck(this, ReviewsContainer);
+
+		var _this4 = _possibleConstructorReturn(this, (ReviewsContainer.__proto__ || Object.getPrototypeOf(ReviewsContainer)).call(this, props));
+
+		_this4.reviews = {
+			"mashable": '"Breathes new life into a tired, old running routine."',
+			"gear-junkie": '"You focus on putting in the work, and the technology handles the rest."',
+			"wired": '"Literally transports you from home to wherever you choose to run."'
+		};
+		_this4.reviewQueue = _this4.buildReviewQueue();
+		return _this4;
+	}
+
+	_createClass(ReviewsContainer, [{
+		key: 'buildReviewQueue',
+		value: function buildReviewQueue() {
+			var queue = [];
+			for (var i = 0; i <= 1; i++) {
+				for (reviewer in this.reviews) {
+					queue.push(React.createElement(ReviewCard, { key: reviewer + '-' + i, reviewer: reviewer, reviewText: this.reviews[reviewer] + i }));
+				}
+			}
+			return queue;
+		}
+	}, {
+		key: 'displayReviewQueue',
+		value: function displayReviewQueue() {}
+	}, {
+		key: 'render',
+		value: function render() {
+			var queue = this.reviewQueue;
+			console.log('fml', queue);
+			return React.createElement(
+				'div',
+				{ className: 'reviews-container' },
+				this.buildReviewQueue()
+			);
+		}
+	}]);
+
+	return ReviewsContainer;
+}(React.Component);
+
+function ReviewCard(props) {
 	return React.createElement(
 		'div',
-		{ className: 'reviews-container' },
+		{ className: 'review-card' },
+		React.createElement('img', { className: 'review-logo', src: 'logos/' + props.reviewer + '-logo.svg' }),
 		React.createElement(
 			'div',
-			{ className: 'review-card' },
-			React.createElement('img', { className: 'company-logo' }),
-			React.createElement('div', { className: 'company-review' })
-		),
-		React.createElement(
-			'div',
-			{ className: 'review-card' },
-			React.createElement('img', { className: 'company-logo' }),
-			React.createElement('div', { className: 'company-review' })
-		),
-		React.createElement(
-			'div',
-			{ className: 'review-card' },
-			React.createElement('img', { className: 'company-logo' }),
-			React.createElement('div', { className: 'company-review' })
+			{ className: 'review-text' },
+			props.reviewText
 		)
 	);
 }

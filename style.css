@@ -196,9 +196,34 @@ body {
 
 .reviews-container {
   background-color: #D5D6D6;
+  padding: 15px 0;
+  width: 180%;
+  display: flex;
+  position: relative;
+  left: -25%;
+}
+
+.review-card {
+  flex: 1;
+  background-color: white;
+  margin: 8px 10px;
+  padding: 20px 36px;
   display: flex;
   justify-content: center;
+  flex-wrap: wrap;
+  text-align: center;
+  color: rgba(46, 49, 52, 0.8);
+  align-items: center;
+  font-size: 0.8em;
+  max-height: 184px;
+  border: 1px solid rgba(244, 245, 247, 0.32);
+  box-shadow: 0 1px 2px 0 rgba(46, 49, 52, 0.4);
 }
+.review-card .review-logo {
+  max-height: 34px;
+  margin-bottom: 8%;
+}
+
 @keyframes fadeIn {
   0% {
     opacity: 0;

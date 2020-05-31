@@ -49,7 +49,7 @@ class IFitPage extends React.Component {
 		const {windowWidth, isHeaderVisible} = this.state;
 		const showCompactNav = this.state.windowWidth < this.windowWidthBreakpoints.tablet;
 		const isPhoneSize = windowWidth < this.windowWidthBreakpoints.phone;
-		console.log(this.state.windowWidth, 'bah')
+
 		return (
 			<div className="ifit-page">
 				<header id="header" className={isHeaderVisible ? "header-fixed" : "header-none"}>
@@ -62,7 +62,7 @@ class IFitPage extends React.Component {
 				</header>
 				<HeroImageSection isBelowCompactNav={showCompactNav} tallerImage={isPhoneSize} />
 				<ReviewsContainer />
-					Lorem ipsum dolor sit amet, consectetur adipisicing elit. voluptatum. Culpa, nisi. Cumque quidem, velit itaque consequuntur facilis sequi numquam nisi voluptatum nemo? Quidem iure doloremque tenetur excepturi, nihil, quod vitae ab. Deserunt sequi porro rem autem minus, temporibus ipsa non. Laboriosam excepturi porro est asperiores, enim maxime quia velit eaque eum itaque aut facere corporis, optio, animi aliquid nulla numquam consequatur culpa pariatur coLorem500 Lorem1000
+					
 			</div>
 		)
 	}
@@ -153,21 +153,48 @@ function HeroImageSection(props) {
 	)
 }
 
-function ReviewsContainer(props) {
+class ReviewsContainer extends React.Component {
+
+	constructor(props) {
+		super(props);
+		this.reviews = {
+			"mashable": '"Breathes new life into a tired, old running routine."',
+			"gear-junkie": '"You focus on putting in the work, and the technology handles the rest."',
+			"wired": '"Literally transports you from home to wherever you choose to run."',
+		}
+		this.reviewQueue = this.buildReviewQueue();
+	}
+	
+	buildReviewQueue() {
+		const queue = [];
+		for (let i = 0; i <= 1; i++) {
+			for (reviewer in this.reviews) {
+				queue.push(<ReviewCard key={`${reviewer}-${i}`} reviewer={reviewer} reviewText={this.reviews[reviewer] + i} />)
+			}
+		}
+		return queue;
+	}
+
+	displayReviewQueue() {
+
+	}
+
+	render() {
+		const queue = this.reviewQueue;
+		console.log('fml', queue)
+		return (
+			<div className="reviews-container">
+				{this.buildReviewQueue()}
+			</div>
+		)
+	} 
+}
+
+function ReviewCard(props) {
 	return (
-		<div className="reviews-container">
-			<div className="review-card">
-				<img className="company-logo" />
-				<div className="company-review"></div>
-			</div>
-			<div className="review-card">
-				<img className="company-logo" />
-				<div className="company-review"></div>
-			</div>
-			<div className="review-card">
-				<img className="company-logo" />
-				<div className="company-review"></div>
-			</div>
+		<div className="review-card">
+			<img className="review-logo" src={`logos/${props.reviewer}-logo.svg`}/>
+			<div className="review-text">{props.reviewText}</div>
 		</div>
 	)
 }
