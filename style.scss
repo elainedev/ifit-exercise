@@ -20,13 +20,15 @@ body {
 
 .header-fixed {
 	position: fixed;
+	top: 0;
 	z-index: 1000;
+	width: 100%;
 }
 
 .header-none {
 	display: none;
-	z-index: 1000;
 }
+
 .top-nav-bar {
 	display: flex;
 	border-bottom: 1px solid $light-gray;
@@ -97,7 +99,7 @@ body {
 }
 
 .hero-section {
-	top: 90px; // to accommodate fixed header
+	margin-top: 90px; // to accommodate fixed header
 	background: #A59D92 url("img/hero-image.png") no-repeat;
 	background-size: 100%;
 	background-position: center 16%;
