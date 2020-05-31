@@ -14,7 +14,11 @@ var IFitPage = function (_React$Component) {
 
 		var _this = _possibleConstructorReturn(this, (IFitPage.__proto__ || Object.getPrototypeOf(IFitPage)).call(this, props));
 
-		_this.phoneSizeBreakpoint = 480;
+		_this.windowWidthBreakpoints = {
+			tablet: 760,
+			phone: 576
+		};
+
 		_this.state = {
 			windowWidth: document.body.clientWidth,
 			heroBottomPosition: null,
@@ -63,22 +67,23 @@ var IFitPage = function (_React$Component) {
 			    windowWidth = _state.windowWidth,
 			    isHeaderVisible = _state.isHeaderVisible;
 
-
-			console.log('fml', this.state.heroBottomPosition, this.scroll);
+			var showCompactNav = this.state.windowWidth < this.windowWidthBreakpoints.tablet;
+			var isPhoneSize = windowWidth < this.windowWidthBreakpoints.phone;
+			console.log(this.state.windowWidth, 'bah');
 			return React.createElement(
 				'div',
 				{ className: 'ifit-page' },
 				React.createElement(
 					'header',
 					{ id: 'header', className: isHeaderVisible ? "header-fixed" : "header-none" },
-					windowWidth < 760 ? React.createElement(CompactNavBar, null) : React.createElement(
+					showCompactNav ? React.createElement(CompactNavBar, null) : React.createElement(
 						'div',
 						null,
 						React.createElement(UpperNavBar, null),
 						React.createElement(MainNavBar, null)
 					)
 				),
-				React.createElement(HeroImageSection, { isBelowCompactNav: windowWidth < 760 }),
+				React.createElement(HeroImageSection, { isBelowCompactNav: showCompactNav, tallerImage: isPhoneSize }),
 				React.createElement(ReviewsContainer, null),
 				'Lorem ipsum dolor sit amet, consectetur adipisicing elit. voluptatum. Culpa, nisi. Cumque quidem, velit itaque consequuntur facilis sequi numquam nisi voluptatum nemo? Quidem iure doloremque tenetur excepturi, nihil, quod vitae ab. Deserunt sequi porro rem autem minus, temporibus ipsa non. Laboriosam excepturi porro est asperiores, enim maxime quia velit eaque eum itaque aut facere corporis, optio, animi aliquid nulla numquam consequatur culpa pariatur coLorem500 Lorem1000'
 			);
@@ -276,7 +281,7 @@ var CompactNavBar = function (_React$Component2) {
 function HeroImageSection(props) {
 	return React.createElement(
 		'div',
-		{ className: 'hero-section ' + (props.isBelowCompactNav ? "margin50" : "margin90"), id: 'hero-section' },
+		{ className: 'hero-section ' + (props.isBelowCompactNav ? "margin50" : "margin90") + ' ' + (props.tallerImage ? "taller" : null), id: 'hero-section' },
 		React.createElement('div', { className: 'darken-bg' }),
 		React.createElement(
 			'div',
@@ -294,7 +299,28 @@ function HeroImageSection(props) {
 }
 
 function ReviewsContainer(props) {
-	return React.createElement('div', null);
+	return React.createElement(
+		'div',
+		{ className: 'reviews-container' },
+		React.createElement(
+			'div',
+			{ className: 'review-card' },
+			React.createElement('img', { className: 'company-logo' }),
+			React.createElement('div', { className: 'company-review' })
+		),
+		React.createElement(
+			'div',
+			{ className: 'review-card' },
+			React.createElement('img', { className: 'company-logo' }),
+			React.createElement('div', { className: 'company-review' })
+		),
+		React.createElement(
+			'div',
+			{ className: 'review-card' },
+			React.createElement('img', { className: 'company-logo' }),
+			React.createElement('div', { className: 'company-review' })
+		)
+	);
 }
 
 var domContainer = document.querySelector("#ifit-page");

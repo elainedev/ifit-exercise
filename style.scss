@@ -18,6 +18,10 @@ body {
 // 	}
 // }
 
+.ifit-page {
+	min-width: 320px;
+}
+
 .header-fixed {
 	position: fixed;
 	top: 0;
@@ -179,6 +183,17 @@ body {
 		margin-top: 50px
 	}
 
+	&.taller {
+		padding-bottom: 100%;
+		background-size: cover;
+
+		.hero-text {
+			font-size: 6vw;
+			animation: fadeIn 1.5s 1s both;
+		}
+
+	}
+
 	.darken-bg {
 		position: absolute;
 		top: 0;
@@ -214,6 +229,16 @@ body {
 		border: none;
 		animation: fadeIn 2s 2.5s both;
 		-webkit-animation: fadeIn 2s 2.5s both;
+	}
+}
+
+.reviews-container {
+	background-color: $light-gray;
+	display: flex;
+	justify-content: center;
+
+	.review-card {
+
 	}
 }
 

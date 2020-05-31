@@ -3,6 +3,10 @@ body {
   font-family: "Open Sans", sans-serif;
 }
 
+.ifit-page {
+  min-width: 320px;
+}
+
 .header-fixed {
   position: fixed;
   top: 0;
@@ -147,6 +151,14 @@ body {
 .hero-section.margin50 {
   margin-top: 50px;
 }
+.hero-section.taller {
+  padding-bottom: 100%;
+  background-size: cover;
+}
+.hero-section.taller .hero-text {
+  font-size: 6vw;
+  animation: fadeIn 1.5s 1s both;
+}
 .hero-section .darken-bg {
   position: absolute;
   top: 0;
@@ -182,6 +194,11 @@ body {
   -webkit-animation: fadeIn 2s 2.5s both;
 }
 
+.reviews-container {
+  background-color: #D5D6D6;
+  display: flex;
+  justify-content: center;
+}
 @keyframes fadeIn {
   0% {
     opacity: 0;

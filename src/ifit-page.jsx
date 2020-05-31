@@ -2,11 +2,16 @@ class IFitPage extends React.Component {
 	
 	constructor(props) {
 		super(props);
-		this.phoneSizeBreakpoint = 480;
+
+		this.windowWidthBreakpoints = {
+	      tablet: 760,
+	      phone: 576,
+	    };
+
 		this.state = {
 			windowWidth: document.body.clientWidth,
 			heroBottomPosition: null,
-			isHeaderVisible: true
+			isHeaderVisible: true,
 		};
 		this.handleScroll = this.handleScroll.bind(this);
 	}
@@ -42,20 +47,20 @@ class IFitPage extends React.Component {
 
 	render() {
 		const {windowWidth, isHeaderVisible} = this.state;
-
-		console.log(
-			'fml', this.state.heroBottomPosition, this.scroll)
+		const showCompactNav = this.state.windowWidth < this.windowWidthBreakpoints.tablet;
+		const isPhoneSize = windowWidth < this.windowWidthBreakpoints.phone;
+		console.log(this.state.windowWidth, 'bah')
 		return (
 			<div className="ifit-page">
 				<header id="header" className={isHeaderVisible ? "header-fixed" : "header-none"}>
-					{windowWidth < 760 ? <CompactNavBar /> :
+					{showCompactNav ? <CompactNavBar /> :
 					<div>
 						<UpperNavBar />
 						<MainNavBar />
 					</div>
 					}
 				</header>
-				<HeroImageSection isBelowCompactNav={windowWidth < 760} />
+				<HeroImageSection isBelowCompactNav={showCompactNav} tallerImage={isPhoneSize} />
 				<ReviewsContainer />
 					Lorem ipsum dolor sit amet, consectetur adipisicing elit. voluptatum. Culpa, nisi. Cumque quidem, velit itaque consequuntur facilis sequi numquam nisi voluptatum nemo? Quidem iure doloremque tenetur excepturi, nihil, quod vitae ab. Deserunt sequi porro rem autem minus, temporibus ipsa non. Laboriosam excepturi porro est asperiores, enim maxime quia velit eaque eum itaque aut facere corporis, optio, animi aliquid nulla numquam consequatur culpa pariatur coLorem500 Lorem1000
 			</div>
@@ -140,7 +145,7 @@ class CompactNavBar extends React.Component {
 
 function HeroImageSection(props) {
 	return (
-		<div className={`hero-section ${props.isBelowCompactNav ? "margin50" : "margin90"}`} id="hero-section">
+		<div className={`hero-section ${props.isBelowCompactNav ? "margin50" : "margin90"} ${props.tallerImage ? "taller" : null}`} id="hero-section">
 			<div className="darken-bg"/>
 			<div className="hero-text">The best personal training,<br/>right in your own home</div>
 			<button className="join-btn">JOIN IFIT COACH</button>
@@ -150,7 +155,20 @@ function HeroImageSection(props) {
 
 function ReviewsContainer(props) {
 	return (
-		<div></div>
+		<div className="reviews-container">
+			<div className="review-card">
+				<img className="company-logo" />
+				<div className="company-review"></div>
+			</div>
+			<div className="review-card">
+				<img className="company-logo" />
+				<div className="company-review"></div>
+			</div>
+			<div className="review-card">
+				<img className="company-logo" />
+				<div className="company-review"></div>
+			</div>
+		</div>
 	)
 }
 
