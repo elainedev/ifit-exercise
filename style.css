@@ -75,8 +75,61 @@ body {
   border: none;
 }
 
+.compact-nav-bar {
+  background-color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px;
+  position: relative;
+}
+.compact-nav-bar img {
+  width: 150px;
+  margin-right: 25%;
+}
+.compact-nav-bar .menu-btn {
+  font-size: 16px;
+  color: rgba(46, 49, 52, 0.8);
+}
+.compact-nav-bar .menu {
+  position: absolute;
+  top: 100%;
+  background-color: white;
+  width: 100%;
+  left: 0;
+  padding: 10px 0 20px;
+  box-shadow: 2px 0 5px rgba(46, 49, 52, 0.12);
+}
+.compact-nav-bar .menu ul {
+  list-style: none;
+}
+.compact-nav-bar .menu ul a {
+  text-transform: uppercase;
+  padding: 10px 0;
+  color: rgba(46, 49, 52, 0.8);
+  font-size: 0.875rem;
+  letter-spacing: 0.07em;
+  border-bottom: 1px solid rgba(46, 49, 52, 0.12);
+  display: block;
+  text-decoration: none;
+}
+.compact-nav-bar .menu ul hr {
+  border-top: 1px solid rgba(46, 49, 52, 0.12);
+  margin: 48px 0 23px;
+}
+.compact-nav-bar .menu ul .sign-up-btn {
+  padding: 8px 12px;
+  font-size: 0.875rem;
+  letter-spacing: 0.07em;
+  margin-top: 20px;
+  text-transform: uppercase;
+  background-color: #0069D2;
+  border-radius: 4px;
+  color: white;
+  border: none;
+}
+
 .hero-section {
-  margin-top: 90px;
   background: #A59D92 url("img/hero-image.png") no-repeat;
   background-size: 100%;
   background-position: center 16%;
@@ -87,6 +140,12 @@ body {
   align-items: center;
   position: relative;
   color: white;
+}
+.hero-section.margin90 {
+  margin-top: 90px;
+}
+.hero-section.margin50 {
+  margin-top: 50px;
 }
 .hero-section .darken-bg {
   position: absolute;

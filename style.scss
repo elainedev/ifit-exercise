@@ -98,8 +98,68 @@ body {
 	}
 }
 
+.compact-nav-bar {
+	background-color: white;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 15px;
+	position: relative;
+
+	img {
+		width: 150px;
+		margin-right: 25%;
+	}
+
+	.menu-btn {
+		font-size: 16px;
+		color: $font-gray;
+	}
+
+	.menu {
+		position: absolute;
+		top: 100%;
+		background-color: white;
+		width: 100%;
+		left: 0;
+		padding: 10px 0 20px;
+		box-shadow: 2px 0 5px rgba(46, 49, 52, .12);
+
+		ul {
+			list-style: none;
+
+			a {
+				text-transform: uppercase;
+				padding: 10px 0;
+				color: $font-gray;
+				font-size: 0.875rem;
+				letter-spacing: 0.07em;
+				border-bottom: 1px solid rgba(46, 49, 52, .12);
+				display: block;
+				text-decoration: none;
+			}
+
+			hr {
+				border-top: 1px solid rgba(46, 49, 52, .12);
+				margin: 48px 0 23px;
+			}
+
+			.sign-up-btn {
+				padding: 8px 12px;
+				font-size: 0.875rem;
+				letter-spacing: 0.07em;
+				margin-top: 20px;
+				text-transform: uppercase;
+				background-color: $ifit-blue;
+				border-radius: 4px;
+				color: white;
+				border: none;
+			}
+		}
+	}
+}
+
 .hero-section {
-	margin-top: 90px; // to accommodate fixed header
 	background: #A59D92 url("img/hero-image.png") no-repeat;
 	background-size: 100%;
 	background-position: center 16%;
@@ -110,6 +170,14 @@ body {
 	align-items: center;
 	position: relative;
 	color: white;
+
+	&.margin90 {
+		margin-top: 90px; // to accommodate fixed header
+	}
+
+	&.margin50 {
+		margin-top: 50px
+	}
 
 	.darken-bg {
 		position: absolute;
