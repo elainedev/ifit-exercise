@@ -84,7 +84,8 @@ var IFitPage = function (_React$Component) {
 				React.createElement(HeroImageSection, { isBelowCompactNav: showCompactNav, tallerImage: isPhoneSize }),
 				React.createElement(ReviewsContainer, { isCardFullScreen: isPhoneSize }),
 				React.createElement(ActivitiesSection, null),
-				React.createElement(EquipmentSection, null)
+				React.createElement(EquipmentSection, null),
+				React.createElement(Footer, { isPhoneSize: isPhoneSize })
 			);
 		}
 	}]);
@@ -564,6 +565,164 @@ var EquipmentSection = function (_React$Component4) {
 	}]);
 
 	return EquipmentSection;
+}(React.Component);
+
+var Footer = function (_React$Component5) {
+	_inherits(Footer, _React$Component5);
+
+	function Footer(props) {
+		_classCallCheck(this, Footer);
+
+		var _this8 = _possibleConstructorReturn(this, (Footer.__proto__ || Object.getPrototypeOf(Footer)).call(this, props));
+
+		_this8.mediaList = ["youtube", "pinterest", "facebook", "twitter", "instagram"];
+		return _this8;
+	}
+
+	_createClass(Footer, [{
+		key: 'render',
+		value: function render() {
+			return React.createElement(
+				'div',
+				{ className: 'footer ' + (this.props.isPhoneSize ? "phone-size" : "") },
+				React.createElement(
+					'div',
+					{ className: 'menu-container' },
+					React.createElement(
+						'ul',
+						null,
+						React.createElement(
+							'li',
+							null,
+							'Company'
+						),
+						React.createElement(
+							'li',
+							null,
+							'About'
+						),
+						React.createElement(
+							'li',
+							null,
+							'Contact Us'
+						),
+						React.createElement(
+							'li',
+							null,
+							'Careers'
+						)
+					),
+					React.createElement(
+						'ul',
+						null,
+						React.createElement(
+							'li',
+							null,
+							'Account'
+						),
+						React.createElement(
+							'li',
+							null,
+							'Log In'
+						),
+						React.createElement(
+							'li',
+							null,
+							'Create Account'
+						)
+					),
+					React.createElement(
+						'ul',
+						null,
+						React.createElement(
+							'li',
+							null,
+							'Support'
+						),
+						React.createElement(
+							'li',
+							null,
+							'Help Center'
+						),
+						React.createElement(
+							'li',
+							null,
+							'Accessibility'
+						)
+					)
+				),
+				React.createElement(
+					'div',
+					{ className: 'social-container' },
+					this.mediaList.map(function (media) {
+						return React.createElement(
+							'div',
+							{ role: 'button', className: 'outer-gradient' },
+							React.createElement(
+								'div',
+								{ className: 'inner' },
+								React.createElement('img', { src: 'icons/' + media + '.png' })
+							)
+						);
+					})
+				),
+				React.createElement(
+					'div',
+					{ className: 'bottom-bar' },
+					React.createElement(
+						'ul',
+						null,
+						React.createElement(
+							'li',
+							null,
+							'iFit.com All Rights Reserved.'
+						),
+						React.createElement(
+							'li',
+							null,
+							'Privacy Policy'
+						),
+						React.createElement(
+							'li',
+							null,
+							'Terms of Use'
+						)
+					),
+					React.createElement(
+						'select',
+						{ className: 'language-menu' },
+						React.createElement(
+							'option',
+							{ value: 'English', 'default': true },
+							'English'
+						),
+						React.createElement(
+							'option',
+							{ value: 'French' },
+							'French'
+						),
+						React.createElement(
+							'option',
+							{ value: 'Spanish' },
+							'Spanish'
+						),
+						React.createElement(
+							'option',
+							{ value: 'Italian' },
+							'Italian'
+						),
+						React.createElement(
+							'option',
+							{ value: 'Portuguese' },
+							'Portuguese'
+						)
+					)
+				)
+			);
+		}
+	}]);
+
+	return Footer;
 }(React.Component);
 
 var domContainer = document.querySelector("#ifit-page");

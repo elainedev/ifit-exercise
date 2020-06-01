@@ -62,6 +62,7 @@ class IFitPage extends React.Component {
 				<ReviewsContainer isCardFullScreen={isPhoneSize} />
 				<ActivitiesSection />
 				<EquipmentSection />
+				<Footer isPhoneSize={isPhoneSize} />
 			</div>
 		)
 	}
@@ -348,6 +349,63 @@ class EquipmentSection extends React.Component {
 						)
 					}
 				</ul>
+			</div>
+		)
+	}
+}
+
+class Footer extends React.Component {
+
+	constructor(props) {
+		super(props);
+		this.mediaList = ["youtube", "pinterest", "facebook", "twitter", "instagram"];
+	}
+
+	render() {
+		return (
+			<div className={`footer ${this.props.isPhoneSize ? "phone-size" : ""}`}>
+				<div className="menu-container">
+					<ul>
+						<li>Company</li>
+						<li>About</li>
+						<li>Contact Us</li>
+						<li>Careers</li>
+					</ul>
+					<ul>
+						<li>Account</li>
+						<li>Log In</li>
+						<li>Create Account</li>
+					</ul>
+					<ul>
+						<li>Support</li>
+						<li>Help Center</li>
+						<li>Accessibility</li>
+					</ul>
+
+				</div>
+				<div className="social-container">
+					{this.mediaList.map(media => 
+						<div role="button" className="outer-gradient">
+							<div className="inner">
+								<img src={`icons/${media}.png`} />
+							</div>
+						</div>
+					)}
+				</div>
+				<div className="bottom-bar">
+					<ul>
+						<li>iFit.com All Rights Reserved.</li>
+						<li>Privacy Policy</li>
+						<li>Terms of Use</li>
+					</ul>
+					<select className="language-menu">
+						<option value="English" default>English</option>
+						<option value="French">French</option>
+						<option value="Spanish">Spanish</option>
+						<option value="Italian">Italian</option>
+						<option value="Portuguese">Portuguese</option>
+					</select>
+				</div>
 			</div>
 		)
 	}
