@@ -323,6 +323,7 @@ class EquipmentSection extends React.Component {
 
 		this.setState({
 			equipmentTopPosition: equipmentBlock.getBoundingClientRect().top
+
 		});
 
 		window.addEventListener('scroll', this.handleScroll);
@@ -330,8 +331,9 @@ class EquipmentSection extends React.Component {
 	}
 
 	handleScroll() {
+		// const currentScrollPos = window.pageYOffset;
 		const fadeInEquipment = window.innerHeight - this.state.equipmentTopPosition <= 0;
-
+		console.log('why', window.innerHeight, this.state.equipmentTopPosition)
 		this.setState({fadeInEquipment})
 	}
 

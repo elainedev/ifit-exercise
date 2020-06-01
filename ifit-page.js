@@ -522,6 +522,7 @@ var EquipmentSection = function (_React$Component4) {
 
 			this.setState({
 				equipmentTopPosition: equipmentBlock.getBoundingClientRect().top
+
 			});
 
 			window.addEventListener('scroll', this.handleScroll);
@@ -529,8 +530,9 @@ var EquipmentSection = function (_React$Component4) {
 	}, {
 		key: 'handleScroll',
 		value: function handleScroll() {
+			// const currentScrollPos = window.pageYOffset;
 			var fadeInEquipment = window.innerHeight - this.state.equipmentTopPosition <= 0;
-
+			console.log('why', window.innerHeight, this.state.equipmentTopPosition);
 			this.setState({ fadeInEquipment: fadeInEquipment });
 		}
 	}, {
