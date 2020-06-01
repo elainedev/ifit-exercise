@@ -163,8 +163,23 @@ class ReviewsContainer extends React.Component {
 			"wired": '"Literally transports you from home to wherever you choose to run."',
 		}
 		this.reviewQueue = this.buildReviewQueue();
+		this.state = {
+			cardWidth: null,
+			slideDistance: 0,
+		}
+		this.updateSlideQueue = this.updateSlideQueue.bind(this);
+	}
+
+	componentDidMount() {
+		const reviewCard = document.querySelector('.review-card');
+		this.setState({cardWidth : reviewCard.offsetWidth});
+
+		window.addEventListener('resize', () => {
+			this.setState({cardWidth : reviewCard.clientWidth});
+		});
 	}
 	
+
 	buildReviewQueue() {
 		const queue = [];
 		for (let i = 0; i <= 1; i++) {
@@ -175,16 +190,29 @@ class ReviewsContainer extends React.Component {
 		return queue;
 	}
 
-	displayReviewQueue() {
+	scrollReviewQueue() {
 
+	}
+
+	updateSlideQueue() {
+		this.setState({slideDistance: this.state.slideDistance -= (this.state.cardWidth + 22)})
 	}
 
 	render() {
 		const queue = this.reviewQueue;
-		console.log('fml', queue)
+
+		// console.log('fml', this.state.cardWidth, slideDistance)
 		return (
 			<div className="reviews-container">
-				{this.buildReviewQueue()}
+				<div className="sliding-container" 
+					style={{transform: `translateX(${this.state.slideDistance}px)`, transition:'transform 2s'}}>
+				
+					{this.buildReviewQueue()}
+					
+				</div>
+				<button className="arrow-icon right" onClick={this.updateSlideQueue}>
+					<img src="icons/right_arrow.png" />
+				</button>
 			</div>
 		)
 	} 

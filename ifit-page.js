@@ -311,10 +311,27 @@ var ReviewsContainer = function (_React$Component3) {
 			"wired": '"Literally transports you from home to wherever you choose to run."'
 		};
 		_this4.reviewQueue = _this4.buildReviewQueue();
+		_this4.state = {
+			cardWidth: null,
+			slideDistance: 0
+		};
+		_this4.updateSlideQueue = _this4.updateSlideQueue.bind(_this4);
 		return _this4;
 	}
 
 	_createClass(ReviewsContainer, [{
+		key: 'componentDidMount',
+		value: function componentDidMount() {
+			var _this5 = this;
+
+			var reviewCard = document.querySelector('.review-card');
+			this.setState({ cardWidth: reviewCard.offsetWidth });
+
+			window.addEventListener('resize', function () {
+				_this5.setState({ cardWidth: reviewCard.clientWidth });
+			});
+		}
+	}, {
 		key: 'buildReviewQueue',
 		value: function buildReviewQueue() {
 			var queue = [];
@@ -326,17 +343,33 @@ var ReviewsContainer = function (_React$Component3) {
 			return queue;
 		}
 	}, {
-		key: 'displayReviewQueue',
-		value: function displayReviewQueue() {}
+		key: 'scrollReviewQueue',
+		value: function scrollReviewQueue() {}
+	}, {
+		key: 'updateSlideQueue',
+		value: function updateSlideQueue() {
+			this.setState({ slideDistance: this.state.slideDistance -= this.state.cardWidth + 22 });
+		}
 	}, {
 		key: 'render',
 		value: function render() {
 			var queue = this.reviewQueue;
-			console.log('fml', queue);
+
+			// console.log('fml', this.state.cardWidth, slideDistance)
 			return React.createElement(
 				'div',
 				{ className: 'reviews-container' },
-				this.buildReviewQueue()
+				React.createElement(
+					'div',
+					{ className: 'sliding-container',
+						style: { transform: 'translateX(' + this.state.slideDistance + 'px)', transition: 'transform 2s' } },
+					this.buildReviewQueue()
+				),
+				React.createElement(
+					'button',
+					{ className: 'arrow-icon right', onClick: this.updateSlideQueue },
+					React.createElement('img', { src: 'icons/right_arrow.png' })
+				)
 			);
 		}
 	}]);
