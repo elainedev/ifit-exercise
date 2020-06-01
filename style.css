@@ -204,6 +204,18 @@ body {
   border: 1px solid rgba(244, 245, 247, 0.32);
   box-shadow: 0 2px 2px 0 rgba(46, 49, 52, 0.3);
 }
+.reviews-container.full-screen {
+  width: 100%;
+  left: 0;
+  padding: 10px;
+  box-sizing: border-box;
+}
+.reviews-container.full-screen .arrow-icon.right {
+  right: 2%;
+}
+.reviews-container.full-screen .arrow-icon.left {
+  left: 2%;
+}
 .reviews-container .sliding-container {
   display: flex;
 }
@@ -225,6 +237,9 @@ body {
 .reviews-container .arrow-icon.right {
   right: 32.5%;
 }
+.reviews-container .arrow-icon.left {
+  left: 15.5%;
+}
 .reviews-container .arrow-icon img {
   width: 9px;
 }
@@ -232,6 +247,7 @@ body {
 .review-card {
   flex: 1;
   background-color: white;
+  min-width: 200px;
   margin: 8px 10px;
   padding: 20px 36px;
   display: flex;

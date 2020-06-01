@@ -16,7 +16,7 @@ var IFitPage = function (_React$Component) {
 
 		_this.windowWidthBreakpoints = {
 			tablet: 760,
-			phone: 576
+			phone: 480
 		};
 
 		_this.state = {
@@ -67,7 +67,7 @@ var IFitPage = function (_React$Component) {
 			    windowWidth = _state.windowWidth,
 			    isHeaderVisible = _state.isHeaderVisible;
 
-			var showCompactNav = this.state.windowWidth < this.windowWidthBreakpoints.tablet;
+			var showCompactNav = windowWidth < this.windowWidthBreakpoints.tablet;
 			var isPhoneSize = windowWidth < this.windowWidthBreakpoints.phone;
 
 			return React.createElement(
@@ -84,7 +84,7 @@ var IFitPage = function (_React$Component) {
 					)
 				),
 				React.createElement(HeroImageSection, { isBelowCompactNav: showCompactNav, tallerImage: isPhoneSize }),
-				React.createElement(ReviewsContainer, null)
+				React.createElement(ReviewsContainer, { isCardFullScreen: isPhoneSize })
 			);
 		}
 	}]);
@@ -337,38 +337,47 @@ var ReviewsContainer = function (_React$Component3) {
 			var queue = [];
 			for (var i = 0; i <= 1; i++) {
 				for (reviewer in this.reviews) {
-					queue.push(React.createElement(ReviewCard, { key: reviewer + '-' + i, reviewer: reviewer, reviewText: this.reviews[reviewer] + i }));
+					queue.push(React.createElement(ReviewCard, { key: reviewer + '-' + i, reviewer: reviewer, reviewText: this.reviews[reviewer], isCardFullScreen: this.props.isCardFullScreen }));
 				}
 			}
 			return queue;
 		}
 	}, {
-		key: 'scrollReviewQueue',
-		value: function scrollReviewQueue() {}
-	}, {
 		key: 'updateSlideQueue',
-		value: function updateSlideQueue() {
-			this.setState({ slideDistance: this.state.slideDistance -= this.state.cardWidth + 22 });
+		value: function updateSlideQueue(direction) {
+			var slideUnit = this.state.cardWidth + 22;
+			direction === "right" ? slideUnit = 0 - slideUnit : slideUnit;
+			this.setState({ slideDistance: this.state.slideDistance += slideUnit });
 		}
 	}, {
 		key: 'render',
 		value: function render() {
+			var _this6 = this;
+
 			var queue = this.reviewQueue;
 
-			// console.log('fml', this.state.cardWidth, slideDistance)
 			return React.createElement(
 				'div',
-				{ className: 'reviews-container' },
+				{ className: 'reviews-container ' + (this.props.isCardFullScreen ? 'full-screen' : '') },
 				React.createElement(
 					'div',
 					{ className: 'sliding-container',
-						style: { transform: 'translateX(' + this.state.slideDistance + 'px)', transition: 'transform 2s' } },
+						style: { transform: 'translateX(' + this.state.slideDistance + 'px)', transition: 'transform 1s' } },
 					this.buildReviewQueue()
 				),
 				React.createElement(
 					'button',
-					{ className: 'arrow-icon right', onClick: this.updateSlideQueue },
+					{ className: 'arrow-icon right', onClick: function onClick() {
+							return _this6.updateSlideQueue('right');
+						} },
 					React.createElement('img', { src: 'icons/right_arrow.png' })
+				),
+				React.createElement(
+					'button',
+					{ className: 'arrow-icon left', onClick: function onClick() {
+							return _this6.updateSlideQueue('left');
+						} },
+					React.createElement('img', { src: 'icons/left_arrow.png' })
 				)
 			);
 		}
@@ -380,7 +389,7 @@ var ReviewsContainer = function (_React$Component3) {
 function ReviewCard(props) {
 	return React.createElement(
 		'div',
-		{ className: 'review-card' },
+		{ className: 'review-card', style: props.isCardFullScreen ? { minWidth: document.body.clientWidth - 114 } : {} },
 		React.createElement('img', { className: 'review-logo', src: 'logos/' + props.reviewer + '-logo.svg' }),
 		React.createElement(
 			'div',

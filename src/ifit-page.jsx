@@ -5,7 +5,7 @@ class IFitPage extends React.Component {
 
 		this.windowWidthBreakpoints = {
 	      tablet: 760,
-	      phone: 576,
+	      phone: 480,
 	    };
 
 		this.state = {
@@ -47,7 +47,7 @@ class IFitPage extends React.Component {
 
 	render() {
 		const {windowWidth, isHeaderVisible} = this.state;
-		const showCompactNav = this.state.windowWidth < this.windowWidthBreakpoints.tablet;
+		const showCompactNav = windowWidth < this.windowWidthBreakpoints.tablet;
 		const isPhoneSize = windowWidth < this.windowWidthBreakpoints.phone;
 
 		return (
@@ -61,7 +61,7 @@ class IFitPage extends React.Component {
 					}
 				</header>
 				<HeroImageSection isBelowCompactNav={showCompactNav} tallerImage={isPhoneSize} />
-				<ReviewsContainer />
+				<ReviewsContainer isCardFullScreen={isPhoneSize} />
 					
 			</div>
 		)
@@ -184,34 +184,34 @@ class ReviewsContainer extends React.Component {
 		const queue = [];
 		for (let i = 0; i <= 1; i++) {
 			for (reviewer in this.reviews) {
-				queue.push(<ReviewCard key={`${reviewer}-${i}`} reviewer={reviewer} reviewText={this.reviews[reviewer] + i} />)
+				queue.push(<ReviewCard key={`${reviewer}-${i}`} reviewer={reviewer} reviewText={this.reviews[reviewer]} isCardFullScreen={this.props.isCardFullScreen} />)
 			}
 		}
 		return queue;
 	}
 
-	scrollReviewQueue() {
-
-	}
-
-	updateSlideQueue() {
-		this.setState({slideDistance: this.state.slideDistance -= (this.state.cardWidth + 22)})
+	updateSlideQueue(direction) {
+		let slideUnit = this.state.cardWidth + 22;
+		direction === "right" ? slideUnit = 0 - slideUnit : slideUnit;
+		this.setState({slideDistance: this.state.slideDistance += slideUnit})
 	}
 
 	render() {
 		const queue = this.reviewQueue;
 
-		// console.log('fml', this.state.cardWidth, slideDistance)
 		return (
-			<div className="reviews-container">
+			<div className={`reviews-container ${this.props.isCardFullScreen ? 'full-screen' : ''}`}>
 				<div className="sliding-container" 
-					style={{transform: `translateX(${this.state.slideDistance}px)`, transition:'transform 2s'}}>
+					style={{transform: `translateX(${this.state.slideDistance}px)`, transition:'transform 1s'}}>
 				
 					{this.buildReviewQueue()}
 					
 				</div>
-				<button className="arrow-icon right" onClick={this.updateSlideQueue}>
+				<button className="arrow-icon right" onClick={() => this.updateSlideQueue('right')}>
 					<img src="icons/right_arrow.png" />
+				</button>
+				<button className="arrow-icon left" onClick={() => this.updateSlideQueue('left')}>
+					<img src="icons/left_arrow.png" />
 				</button>
 			</div>
 		)
@@ -220,7 +220,7 @@ class ReviewsContainer extends React.Component {
 
 function ReviewCard(props) {
 	return (
-		<div className="review-card">
+		<div className={`review-card`} style={props.isCardFullScreen ? {minWidth: document.body.clientWidth - 114} : {}}>
 			<img className="review-logo" src={`logos/${props.reviewer}-logo.svg`}/>
 			<div className="review-text">{props.reviewText}</div>
 		</div>

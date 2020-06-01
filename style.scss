@@ -237,17 +237,27 @@ body {
 .reviews-container {
 	background-color: #F4F5F7;
 	padding: 15px 0;
-	// display: grid;
-	// grid-auto-flow: column;
-	// grid-template-columns: repeat(auto-fit, 1fr);
-	// grid-column: 1 / 3;
-	// grid-gap: 20px;
 	width: 188%;
 	position: relative;
 	left: -28.25%;
 	align-items: center;
 	border: 1px solid rgba(244,245,247,0.32);
 	box-shadow: 0 2px 2px 0 rgba(46,49,52,0.30);
+
+	&.full-screen {
+		width: 100%;
+		left: 0;
+		padding: 10px;
+		box-sizing: border-box;
+
+		.arrow-icon.right {
+			right: 2%
+		}
+
+		.arrow-icon.left {
+			left: 2%
+		}
+	}
 
 	.sliding-container {
 		display: flex;
@@ -272,6 +282,10 @@ body {
 			right: 32.5%;
 		}
 
+		&.left {
+			left: 15.5%;
+		}
+
 		img {
 			width: 9px;
 		}
@@ -283,6 +297,7 @@ body {
 .review-card {
 	flex: 1;
 	background-color: white;
+	min-width: 200px;
 	margin: 8px 10px;
 	padding: 20px 36px;
 	display: flex;
@@ -295,6 +310,10 @@ body {
 	height: 110px;
 	border: 1px solid rgba(244,245,247,.32);
 	box-shadow: 0 1px 2px 0 rgba(46,49,52,.4);
+
+	// &.full-screen {
+	// 	min-width: 27%;
+	// }
 
 	.review-logo {
 		max-height: 34px;
