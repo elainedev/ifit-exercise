@@ -498,7 +498,12 @@ ul {
 }
 .footer .bottom-bar .language-menu {
   position: absolute;
-  left: 0;
+  left: 5px;
+  background-color: #2E3134;
+  color: #D5D6D6;
+  font-weight: 600;
+  font-size: 17px;
+  outline: none;
 }
 
 @keyframes fadeIn {

@@ -399,7 +399,7 @@ class Footer extends React.Component {
 						<li>Terms of Use</li>
 					</ul>
 					<select className="language-menu">
-						<option value="English" default>English</option>
+						<option value="English" selected>English</option>
 						<option value="French">French</option>
 						<option value="Spanish">Spanish</option>
 						<option value="Italian">Italian</option>

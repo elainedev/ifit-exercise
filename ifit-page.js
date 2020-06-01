@@ -693,7 +693,7 @@ var Footer = function (_React$Component5) {
 						{ className: 'language-menu' },
 						React.createElement(
 							'option',
-							{ value: 'English', 'default': true },
+							{ value: 'English', selected: true },
 							'English'
 						),
 						React.createElement(

@@ -588,7 +588,12 @@ ul {
 
 		.language-menu {
 			position: absolute;
-			left: 0;
+			left: 5px;
+			background-color: $dark-gray;
+			color: $light-gray;
+			font-weight: 600;
+			font-size: 17px;
+			outline: none;
 		}
 	}
 }
