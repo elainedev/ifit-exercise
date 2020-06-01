@@ -333,16 +333,14 @@ class EquipmentSection extends React.Component {
 	handleScroll() {
 		// const currentScrollPos = window.pageYOffset;
 		const fadeInEquipment = window.innerHeight - this.state.equipmentTopPosition <= 0;
-		console.log('why', window.innerHeight, this.state.equipmentTopPosition)
 		this.setState({fadeInEquipment})
-		console.log('why2', window.innerHeight, this.state.equipmentTopPosition, fadeInEquipment)
 	}
 
 	render() {
 		return (
 			<div className="equipment-section">
 				<div className="equipment-question">Interested in our exciting iFit-enabled equipment?</div>
-				<ul id="scroll-to-equipment" className={this.state.fadeInEquipment ? "fade-in" : "hidden"}>
+				<ul id="scroll-to-equipment" className={this.state.fadeInEquipment ? "fade-in" : "default"}>
 					{
 						this.equipmentList.map(equipment => 
 							<li key={equipment}>

@@ -532,9 +532,7 @@ var EquipmentSection = function (_React$Component4) {
 		value: function handleScroll() {
 			// const currentScrollPos = window.pageYOffset;
 			var fadeInEquipment = window.innerHeight - this.state.equipmentTopPosition <= 0;
-			console.log('why', window.innerHeight, this.state.equipmentTopPosition);
 			this.setState({ fadeInEquipment: fadeInEquipment });
-			console.log('why2', window.innerHeight, this.state.equipmentTopPosition, fadeInEquipment);
 		}
 	}, {
 		key: 'render',
@@ -549,7 +547,7 @@ var EquipmentSection = function (_React$Component4) {
 				),
 				React.createElement(
 					'ul',
-					{ id: 'scroll-to-equipment', className: this.state.fadeInEquipment ? "fade-in" : "hidden" },
+					{ id: 'scroll-to-equipment', className: this.state.fadeInEquipment ? "fade-in" : "default" },
 					this.equipmentList.map(function (equipment) {
 						return React.createElement(
 							'li',

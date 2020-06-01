@@ -373,12 +373,12 @@ ul {
   margin-top: 8px;
 }
 
-.hidden {
-  opacity: 0;
+.default {
+  opacity: 1;
 }
 
 .fade-in {
-  animation: fadeIn 1.5s 2s both;
+  animation: fadeIn 1.5s 1.5s both;
 }
 
 .equipment-section .equipment-question {
