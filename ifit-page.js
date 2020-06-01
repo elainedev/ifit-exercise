@@ -408,7 +408,8 @@ function ActivitiesSection() {
 			distance: '6,248 M'
 		},
 		1: {
-			text: "Performance Series"
+			text: "Performance Series",
+			workouts: 9
 		},
 		2: {
 			text: "Slow Pulls and Fast Intervals",
@@ -416,7 +417,8 @@ function ActivitiesSection() {
 			distance: '9,948 M'
 		},
 		3: {
-			text: "20 Mintues to Toned"
+			text: "20 Mintues to Toned",
+			workouts: 12
 		},
 		4: {
 			text: "Charles Race, Boston, Massachusetts",
@@ -424,7 +426,8 @@ function ActivitiesSection() {
 			distance: '8,648 M'
 		},
 		5: {
-			text: "Full-Body HIIT Series"
+			text: "Full-Body HIIT Series",
+			workouts: 12
 		},
 		6: {
 			text: "Kafue River, Zambia--Power Stroke Pyramid",
@@ -432,7 +435,8 @@ function ActivitiesSection() {
 			distance: '4,660 M'
 		},
 		7: {
-			text: "Shred & Burn Series"
+			text: "Shred & Burn Series",
+			workouts: 16
 		}
 	};
 	return React.createElement(
@@ -447,14 +451,46 @@ function ActivitiesSection() {
 					{ key: i },
 					React.createElement(
 						'div',
-						null,
+						{ className: 'img-wrap' },
 						React.createElement('img', { src: 'img/grid' + i + '.png' }),
-						React.createElement('figcaption', null)
+						activitiesData[i].hasOwnProperty("workouts") ? React.createElement(
+							'div',
+							{ className: 'workout-overlay' },
+							React.createElement(
+								'div',
+								{ className: 'workout-number' },
+								activitiesData[i].workouts
+							),
+							React.createElement(
+								'div',
+								null,
+								'WORKOUTS'
+							),
+							React.createElement('img', { src: 'icons/icn_playlist.svg' })
+						) : null
 					),
 					React.createElement(
-						'p',
-						null,
-						activitiesData[i].text
+						'div',
+						{ className: 'description-wrap' },
+						React.createElement('img', { className: 'instructor-img', src: 'img/instructor' + i + '.png' }),
+						React.createElement(
+							'div',
+							null,
+							activitiesData[i].text
+						),
+						activitiesData[i].hasOwnProperty("time") ? React.createElement(
+							'div',
+							{ className: 'stats-container' },
+							React.createElement('img', { className: 'metrics-icon', src: 'icons/timer_icon.png' }),
+							activitiesData[i].time,
+							React.createElement('img', { className: 'metrics-icon', src: 'icons/distance_icon.png' }),
+							activitiesData[i].distance
+						) : null,
+						React.createElement(
+							'div',
+							{ className: 'details' },
+							'VIEW DETAILS'
+						)
 					)
 				);
 			})

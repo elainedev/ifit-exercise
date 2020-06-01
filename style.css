@@ -194,6 +194,9 @@ body {
   animation: fadeIn 2s 2.5s both;
   -webkit-animation: fadeIn 2s 2.5s both;
 }
+.hero-section .join-btn:hover {
+  transform: scale(1.2);
+}
 
 .reviews-container {
   background-color: #F4F5F7;
@@ -277,15 +280,93 @@ body {
   list-style: none;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-  grid-gap: 2%;
-  padding: 5% 10%;
+  grid-column-gap: 30px;
+  grid-row-gap: 40px;
+  padding: 3% 10%;
 }
 .activities-section ul li {
-  box-shadow: 0 7px 12px 0 rgba(46, 49, 52, 0.3);
+  box-shadow: 0 2px 2px 0 rgba(46, 49, 52, 0.3);
   border-radius: 4px;
+  overflow: hidden;
+  position: relative;
+  cursor: pointer;
+}
+.activities-section ul li:hover {
+  box-shadow: 0 7px 12px 0 rgba(46, 49, 52, 0.3);
+  transform: scale(1.1);
+}
+.activities-section ul li:hover .details {
+  opacity: 1;
+  visibility: visible;
+}
+.activities-section ul li .details {
+  opacity: 0;
+  visibility: hidden;
+  color: #0069D2;
+  position: absolute;
+  bottom: 15px;
+  left: 15px;
+  font-size: 16px;
+}
+.activities-section ul li .img-wrap {
+  position: relative;
+}
+.activities-section ul li .img-wrap .workout-overlay {
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.75);
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 40%;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10% 0;
+  font-size: 14px;
+}
+.activities-section ul li .img-wrap .workout-overlay .workout-number {
+  font-size: 26px;
+  font-weight: 500;
+  display: block;
+  margin-bottom: 0.6rem;
+}
+.activities-section ul li .img-wrap .workout-overlay img {
+  width: 25px;
+  background-color: transparent;
+  margin-top: 1.2rem;
 }
 .activities-section ul li img {
   width: 100%;
+  background-color: #D5D6D6;
+  display: block;
+}
+.activities-section ul li .description-wrap {
+  padding: 15px;
+  color: #2E3134;
+  font-size: 18px;
+  font-weight: 700;
+  min-height: 7rem;
+}
+.activities-section ul li .description-wrap img.instructor-img {
+  float: right;
+  width: 10%;
+  border-radius: 4px;
+  margin-left: 5px;
+}
+.activities-section ul li .description-wrap img.metrics-icon {
+  width: 6%;
+  background-color: white;
+  margin: 5px;
+}
+.activities-section ul li .description-wrap img.metrics-icon:first-child {
+  margin-left: 0;
+}
+.activities-section ul li .description-wrap .stats-container {
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  margin-top: 8px;
 }
 
 @keyframes fadeIn {

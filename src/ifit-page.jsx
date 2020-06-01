@@ -237,6 +237,7 @@ function ActivitiesSection() {
 		},
 		1 : {
 			text: "Performance Series",
+			workouts: 9
 		},
 		2 : {
 			text: "Slow Pulls and Fast Intervals",
@@ -244,7 +245,8 @@ function ActivitiesSection() {
 			distance: '9,948 M'
 		},
 		3 : {
-			text: "20 Mintues to Toned"
+			text: "20 Mintues to Toned",
+			workouts: 12,
 		},
 		4 : {
 			text: "Charles Race, Boston, Massachusetts",
@@ -252,7 +254,8 @@ function ActivitiesSection() {
 			distance: '8,648 M'
 		},
 		5 : {
-			text: "Full-Body HIIT Series"
+			text: "Full-Body HIIT Series",
+			workouts: 12
 		},
 		6 : {
 			text: "Kafue River, Zambia--Power Stroke Pyramid",
@@ -260,7 +263,8 @@ function ActivitiesSection() {
 			distance: '4,660 M'
 		},
 		7 : {
-			text: "Shred & Burn Series"
+			text: "Shred & Burn Series",
+			 workouts: 16
 		}
 	}
 	return (
@@ -268,12 +272,32 @@ function ActivitiesSection() {
 			<ul>
 				{Object.keys(activitiesData).map((activity, i) => 
 					<li key={i}>
-						<div>
+						<div className="img-wrap">
 							<img src={`img/grid${i}.png`} />
-							<figcaption>
-							</figcaption>
+							{activitiesData[i].hasOwnProperty("workouts") ?
+								<div className="workout-overlay">
+									<div className="workout-number">{activitiesData[i].workouts}</div>
+									<div>WORKOUTS</div>
+									<img src="icons/icn_playlist.svg" />
+								</div>
+								: null
+							}
 						</div>
-						<p>{activitiesData[i].text}</p>
+						<div className="description-wrap">
+							<img className="instructor-img" src={`img/instructor${i}.png`} />
+							<div>{activitiesData[i].text}</div>
+							
+							{activitiesData[i].hasOwnProperty("time") ?
+								<div className="stats-container">
+									<img className="metrics-icon" src="icons/timer_icon.png" />
+									{activitiesData[i].time}
+									<img className="metrics-icon" src="icons/distance_icon.png" />
+									{activitiesData[i].distance}
+								</div>
+								: null
+							}
+							<div className="details">VIEW DETAILS</div>
+						</div>
 					</li>
 				)}
 			</ul>
