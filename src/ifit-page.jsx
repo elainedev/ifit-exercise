@@ -62,7 +62,7 @@ class IFitPage extends React.Component {
 				</header>
 				<HeroImageSection isBelowCompactNav={showCompactNav} tallerImage={isPhoneSize} />
 				<ReviewsContainer isCardFullScreen={isPhoneSize} />
-					
+				<ActivitiesSection />
 			</div>
 		)
 	}
@@ -220,9 +220,63 @@ class ReviewsContainer extends React.Component {
 
 function ReviewCard(props) {
 	return (
-		<div className={`review-card`} style={props.isCardFullScreen ? {minWidth: document.body.clientWidth - 114} : {}}>
+		<div className="review-card" style={props.isCardFullScreen ? {minWidth: document.body.clientWidth - 114} : {}}>
 			<img className="review-logo" src={`logos/${props.reviewer}-logo.svg`}/>
 			<div className="review-text">{props.reviewText}</div>
+		</div>
+	)
+}
+
+
+function ActivitiesSection() {
+	const activitiesData = {
+		0 : {
+			text: "Lake Inniscarra, Ireland--Pyramid",
+			time: '30:53',
+			distance: '6,248 M'
+		},
+		1 : {
+			text: "Performance Series",
+		},
+		2 : {
+			text: "Slow Pulls and Fast Intervals",
+			time: '44:13',
+			distance: '9,948 M'
+		},
+		3 : {
+			text: "20 Mintues to Toned"
+		},
+		4 : {
+			text: "Charles Race, Boston, Massachusetts",
+			time: '36:22',
+			distance: '8,648 M'
+		},
+		5 : {
+			text: "Full-Body HIIT Series"
+		},
+		6 : {
+			text: "Kafue River, Zambia--Power Stroke Pyramid",
+			time: '22:22',
+			distance: '4,660 M'
+		},
+		7 : {
+			text: "Shred & Burn Series"
+		}
+	}
+	return (
+		<div className="activities-section">
+			<ul>
+				{Object.keys(activitiesData).map((activity, i) => 
+					<li key={i}>
+						<div>
+							<img src={`img/grid${i}.png`} />
+							<figcaption>
+							</figcaption>
+						</div>
+						<p>{activitiesData[i].text}</p>
+					</li>
+				)}
+			</ul>
 		</div>
 	)
 }

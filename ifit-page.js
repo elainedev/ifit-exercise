@@ -84,7 +84,8 @@ var IFitPage = function (_React$Component) {
 					)
 				),
 				React.createElement(HeroImageSection, { isBelowCompactNav: showCompactNav, tallerImage: isPhoneSize }),
-				React.createElement(ReviewsContainer, { isCardFullScreen: isPhoneSize })
+				React.createElement(ReviewsContainer, { isCardFullScreen: isPhoneSize }),
+				React.createElement(ActivitiesSection, null)
 			);
 		}
 	}]);
@@ -395,6 +396,68 @@ function ReviewCard(props) {
 			'div',
 			{ className: 'review-text' },
 			props.reviewText
+		)
+	);
+}
+
+function ActivitiesSection() {
+	var activitiesData = {
+		0: {
+			text: "Lake Inniscarra, Ireland--Pyramid",
+			time: '30:53',
+			distance: '6,248 M'
+		},
+		1: {
+			text: "Performance Series"
+		},
+		2: {
+			text: "Slow Pulls and Fast Intervals",
+			time: '44:13',
+			distance: '9,948 M'
+		},
+		3: {
+			text: "20 Mintues to Toned"
+		},
+		4: {
+			text: "Charles Race, Boston, Massachusetts",
+			time: '36:22',
+			distance: '8,648 M'
+		},
+		5: {
+			text: "Full-Body HIIT Series"
+		},
+		6: {
+			text: "Kafue River, Zambia--Power Stroke Pyramid",
+			time: '22:22',
+			distance: '4,660 M'
+		},
+		7: {
+			text: "Shred & Burn Series"
+		}
+	};
+	return React.createElement(
+		'div',
+		{ className: 'activities-section' },
+		React.createElement(
+			'ul',
+			null,
+			Object.keys(activitiesData).map(function (activity, i) {
+				return React.createElement(
+					'li',
+					{ key: i },
+					React.createElement(
+						'div',
+						null,
+						React.createElement('img', { src: 'img/grid' + i + '.png' }),
+						React.createElement('figcaption', null)
+					),
+					React.createElement(
+						'p',
+						null,
+						activitiesData[i].text
+					)
+				);
+			})
 		)
 	);
 }

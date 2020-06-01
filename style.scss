@@ -1,4 +1,5 @@
 $font-gray: rgba(46,49,52,0.80);
+$font-black: #2E3134;
 $light-gray: #D5D6D6;
 $default-font: 'Open Sans', sans-serif;
 $ifit-blue: #0069D2;
@@ -20,7 +21,7 @@ body {
 
 .ifit-page {
 	min-width: 320px;
-	// overflow: hidden;
+	overflow: hidden;
 }
 
 .header-fixed {
@@ -236,7 +237,7 @@ body {
 
 .reviews-container {
 	background-color: #F4F5F7;
-	padding: 15px 0;
+	padding: 12px 0;
 	width: 188%;
 	position: relative;
 	left: -28.25%;
@@ -319,7 +320,36 @@ body {
 		max-height: 34px;
 		margin-bottom: 8%;
 	}
+
+	.review-text {
+		width: 100%;
+	}
 }
+
+.activities-section {
+	width: 100%;
+	
+
+	ul {
+		list-style: none;
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+		grid-gap: 2%;
+		padding: 5% 10%;
+
+		li {
+			box-shadow: 0 7px 12px 0 rgba(46,49,52,0.30);
+			border-radius: 4px;
+
+			img {
+				width: 100%;
+			}
+		}
+	}
+
+
+}
+
 
 
 @keyframes fadeIn {

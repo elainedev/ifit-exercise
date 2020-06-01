@@ -5,6 +5,7 @@ body {
 
 .ifit-page {
   min-width: 320px;
+  overflow: hidden;
 }
 
 .header-fixed {
@@ -196,7 +197,7 @@ body {
 
 .reviews-container {
   background-color: #F4F5F7;
-  padding: 15px 0;
+  padding: 12px 0;
   width: 188%;
   position: relative;
   left: -28.25%;
@@ -264,6 +265,27 @@ body {
 .review-card .review-logo {
   max-height: 34px;
   margin-bottom: 8%;
+}
+.review-card .review-text {
+  width: 100%;
+}
+
+.activities-section {
+  width: 100%;
+}
+.activities-section ul {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  grid-gap: 2%;
+  padding: 5% 10%;
+}
+.activities-section ul li {
+  box-shadow: 0 7px 12px 0 rgba(46, 49, 52, 0.3);
+  border-radius: 4px;
+}
+.activities-section ul li img {
+  width: 100%;
 }
 
 @keyframes fadeIn {
