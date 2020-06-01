@@ -23,7 +23,7 @@ class IFitPage extends React.Component {
 
 		this.setState({
 			heroBottomPosition: heroSection.clientHeight + headerHeight,
-		})
+		});
 
 		window.addEventListener('resize', () => {
 			this.setState({
@@ -39,9 +39,7 @@ class IFitPage extends React.Component {
 		const currentScrollPos = window.pageYOffset;
 		const isHeaderVisible = currentScrollPos < this.state.heroBottomPosition;
 
-		this.setState({
-			isHeaderVisible
-		})
+		this.setState({isHeaderVisible})
 	}
 
 
@@ -63,6 +61,7 @@ class IFitPage extends React.Component {
 				<HeroImageSection isBelowCompactNav={showCompactNav} tallerImage={isPhoneSize} />
 				<ReviewsContainer isCardFullScreen={isPhoneSize} />
 				<ActivitiesSection />
+				<EquipmentSection />
 			</div>
 		)
 	}
@@ -303,6 +302,55 @@ function ActivitiesSection() {
 			</ul>
 		</div>
 	)
+}
+
+class EquipmentSection extends React.Component {
+	
+	constructor(props) {
+		super(props);
+		this.equipmentList = ["treadmills", "bikes", "ellipticals", "strength"];
+		this.state = {
+			fadeInEquipment: false,
+			equipmentTopPosition: null
+		}
+		this.handleScroll = this.handleScroll.bind(this);
+	}
+	
+
+	componentDidMount() {
+		const equipmentBlock = document.getElementById('scroll-to-equipment');
+
+		this.setState({
+			equipmentTopPosition: equipmentBlock.getBoundingClientRect().top
+		});
+
+		window.addEventListener('scroll', this.handleScroll);
+
+	}
+
+	handleScroll() {
+		const fadeInEquipment = window.innerHeight - this.state.equipmentTopPosition <= 0;
+
+		this.setState({fadeInEquipment})
+	}
+
+	render() {
+		return (
+			<div className="equipment-section">
+				<div className="equipment-question">Interested in our exciting iFit-enabled equipment?</div>
+				<ul id="scroll-to-equipment" className={this.state.fadeInEquipment ? "fade-in" : "hidden"}>
+					{
+						this.equipmentList.map(equipment => 
+							<li key={equipment}>
+								<img src={`img/equipment-${equipment}.png`} />
+								<div className="equipment-caption">{equipment}</div>
+							</li>	
+						)
+					}
+				</ul>
+			</div>
+		)
+	}
 }
 
 const domContainer = document.querySelector("#ifit-page");

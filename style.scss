@@ -316,10 +316,6 @@ body {
 	border: 1px solid rgba(244,245,247,.32);
 	box-shadow: 0 1px 2px 0 rgba(46,49,52,.4);
 
-	// &.full-screen {
-	// 	min-width: 27%;
-	// }
-
 	.review-logo {
 		max-height: 34px;
 		margin-bottom: 8%;
@@ -336,7 +332,7 @@ body {
 	ul {
 		list-style: none;
 		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+		grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
 		grid-column-gap: 30px;
 		grid-row-gap: 40px;
 		padding: 3% 10%;
@@ -415,7 +411,7 @@ body {
 
 				img.instructor-img {
 					float: right;
-					width: 10%;
+					width: 15%;
 					border-radius: 4px;
 					margin-left: 5px;
 				}
@@ -440,10 +436,59 @@ body {
 		}
 	}
 
-
+	
 }
 
+.hidden {
+	opacity: 0;
+}
 
+.fade-in {
+	animation: fadeIn 1.5s 2.5s both;
+}
+
+.equipment-section {
+	.equipment-question {
+		text-align: center;
+		color: $font-gray;
+		font-size: 20px;
+		font-weight: 600;
+		margin-bottom: 20px;
+	}
+
+	ul {
+		list-style: none;
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+		grid-gap: 1rem;
+		margin: 0 25px;
+		padding: 0;
+
+		li {
+			border: 1px solid $light-gray;
+			display: flex;
+			justify-content: center;
+			font-size: 18px;
+			font-weight: 600;
+			color: gray;
+			text-transform: capitalize;
+			flex-direction: column;
+			align-items: center;
+			padding: 30px 0 15px;
+			// animation: fadeIn 1.5s 1s both;
+
+			img {
+				display: block;
+				width: 220px;
+				height: 250px;
+				object-fit: contain;
+				margin-bottom: 15px
+			}
+
+
+		}
+	}
+}
 
 @keyframes fadeIn {
 	0% {

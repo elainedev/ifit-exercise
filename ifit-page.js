@@ -56,9 +56,7 @@ var IFitPage = function (_React$Component) {
 			var currentScrollPos = window.pageYOffset;
 			var isHeaderVisible = currentScrollPos < this.state.heroBottomPosition;
 
-			this.setState({
-				isHeaderVisible: isHeaderVisible
-			});
+			this.setState({ isHeaderVisible: isHeaderVisible });
 		}
 	}, {
 		key: 'render',
@@ -85,7 +83,8 @@ var IFitPage = function (_React$Component) {
 				),
 				React.createElement(HeroImageSection, { isBelowCompactNav: showCompactNav, tallerImage: isPhoneSize }),
 				React.createElement(ReviewsContainer, { isCardFullScreen: isPhoneSize }),
-				React.createElement(ActivitiesSection, null)
+				React.createElement(ActivitiesSection, null),
+				React.createElement(EquipmentSection, null)
 			);
 		}
 	}]);
@@ -497,6 +496,75 @@ function ActivitiesSection() {
 		)
 	);
 }
+
+var EquipmentSection = function (_React$Component4) {
+	_inherits(EquipmentSection, _React$Component4);
+
+	function EquipmentSection(props) {
+		_classCallCheck(this, EquipmentSection);
+
+		var _this7 = _possibleConstructorReturn(this, (EquipmentSection.__proto__ || Object.getPrototypeOf(EquipmentSection)).call(this, props));
+
+		_this7.equipmentList = ["treadmills", "bikes", "ellipticals", "strength"];
+		_this7.state = {
+			fadeInEquipment: false,
+			equipmentTopPosition: null
+		};
+		_this7.handleScroll = _this7.handleScroll.bind(_this7);
+		return _this7;
+	}
+
+	_createClass(EquipmentSection, [{
+		key: 'componentDidMount',
+		value: function componentDidMount() {
+			var equipmentBlock = document.getElementById('scroll-to-equipment');
+
+			this.setState({
+				equipmentTopPosition: equipmentBlock.getBoundingClientRect().top
+			});
+
+			window.addEventListener('scroll', this.handleScroll);
+		}
+	}, {
+		key: 'handleScroll',
+		value: function handleScroll() {
+			var fadeInEquipment = window.innerHeight - this.state.equipmentTopPosition <= 0;
+
+			this.setState({ fadeInEquipment: fadeInEquipment });
+		}
+	}, {
+		key: 'render',
+		value: function render() {
+			return React.createElement(
+				'div',
+				{ className: 'equipment-section' },
+				React.createElement(
+					'div',
+					{ className: 'equipment-question' },
+					'Interested in our exciting iFit-enabled equipment?'
+				),
+				React.createElement(
+					'ul',
+					{ id: 'scroll-to-equipment', className: this.state.fadeInEquipment ? "fade-in" : "hidden" },
+					this.equipmentList.map(function (equipment) {
+						return React.createElement(
+							'li',
+							{ key: equipment },
+							React.createElement('img', { src: 'img/equipment-' + equipment + '.png' }),
+							React.createElement(
+								'div',
+								{ className: 'equipment-caption' },
+								equipment
+							)
+						);
+					})
+				)
+			);
+		}
+	}]);
+
+	return EquipmentSection;
+}(React.Component);
 
 var domContainer = document.querySelector("#ifit-page");
 ReactDOM.render(React.createElement(IFitPage, null), domContainer);
