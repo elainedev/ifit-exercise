@@ -657,7 +657,7 @@ var Footer = function (_React$Component5) {
 					this.mediaList.map(function (media) {
 						return React.createElement(
 							'div',
-							{ role: 'button', className: 'outer-gradient' },
+							{ role: 'button', className: 'outer-gradient', key: media },
 							React.createElement(
 								'div',
 								{ className: 'inner' },
@@ -693,7 +693,7 @@ var Footer = function (_React$Component5) {
 						{ className: 'language-menu' },
 						React.createElement(
 							'option',
-							{ value: 'English', selected: true },
+							{ value: 'English' },
 							'English'
 						),
 						React.createElement(

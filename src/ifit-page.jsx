@@ -385,7 +385,7 @@ class Footer extends React.Component {
 				</div>
 				<div className="social-container">
 					{this.mediaList.map(media => 
-						<div role="button" className="outer-gradient">
+						<div role="button" className="outer-gradient" key={media}>
 							<div className="inner">
 								<img src={`icons/${media}.png`} />
 							</div>
@@ -399,7 +399,7 @@ class Footer extends React.Component {
 						<li>Terms of Use</li>
 					</ul>
 					<select className="language-menu">
-						<option value="English" selected>English</option>
+						<option value="English">English</option>
 						<option value="French">French</option>
 						<option value="Spanish">Spanish</option>
 						<option value="Italian">Italian</option>

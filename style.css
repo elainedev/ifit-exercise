@@ -378,7 +378,7 @@ ul {
 }
 
 .fade-in {
-  animation: fadeIn 1.5s 2.5s both;
+  animation: fadeIn 1.5s 2s both;
 }
 
 .equipment-section .equipment-question {
