@@ -335,6 +335,7 @@ class EquipmentSection extends React.Component {
 		const fadeInEquipment = window.innerHeight - this.state.equipmentTopPosition <= 0;
 		console.log('why', window.innerHeight, this.state.equipmentTopPosition)
 		this.setState({fadeInEquipment})
+		console.log('why2', window.innerHeight, this.state.equipmentTopPosition, fadeInEquipment)
 	}
 
 	render() {

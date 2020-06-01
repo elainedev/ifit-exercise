@@ -534,6 +534,7 @@ var EquipmentSection = function (_React$Component4) {
 			var fadeInEquipment = window.innerHeight - this.state.equipmentTopPosition <= 0;
 			console.log('why', window.innerHeight, this.state.equipmentTopPosition);
 			this.setState({ fadeInEquipment: fadeInEquipment });
+			console.log('why2', window.innerHeight, this.state.equipmentTopPosition, fadeInEquipment);
 		}
 	}, {
 		key: 'render',
