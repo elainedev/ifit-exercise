@@ -305,6 +305,8 @@ var ReviewsContainer = function (_React$Component3) {
 
 		var _this4 = _possibleConstructorReturn(this, (ReviewsContainer.__proto__ || Object.getPrototypeOf(ReviewsContainer)).call(this, props));
 
+		_this4.delaySliding = null;
+
 		_this4.reviews = {
 			"mashable": '"Breathes new life into a tired, old running routine."',
 			"gear-junkie": '"You focus on putting in the work, and the technology handles the rest."',
@@ -313,10 +315,26 @@ var ReviewsContainer = function (_React$Component3) {
 		_this4.state = {
 			increment: 0
 		};
+		_this4.updateSlideQueue = _this4.updateSlideQueue.bind(_this4);
+		// this.autoSlide = this.autoSlide.bind(this);
 		return _this4;
 	}
 
 	_createClass(ReviewsContainer, [{
+		key: 'componentDidMount',
+		value: function componentDidMount() {
+			this.autoSlideFunction();
+		}
+	}, {
+		key: 'autoSlideFunction',
+		value: function autoSlideFunction() {
+			var _this5 = this;
+
+			this.autoSlide = setInterval(function () {
+				return _this5.updateSlideQueue('right');
+			}, 4500);
+		}
+	}, {
 		key: 'buildReviewQueue',
 		value: function buildReviewQueue() {
 			var queue = [];
@@ -326,14 +344,14 @@ var ReviewsContainer = function (_React$Component3) {
 
 			var length = Object.keys(this.reviews).length * 3;
 			var index = 0;
-			var k = 1;
+			// let k = 1;
 
 			for (var j = 0; j <= 2; j++) {
 				for (reviewer in this.reviews) {
 
 					var iUnit = index + increment;
-					if (direction === "left") k = Math.ceil(Math.abs(iUnit / length));
-					var i = (increment >= 0 ? iUnit : iUnit + length * k) % length;
+					// if (direction === "left") k = Math.ceil( Math.abs(iUnit / length) );
+					var i = (increment >= 0 ? iUnit : iUnit - length * increment) % length;
 
 					queue.push(React.createElement(ReviewCard, {
 						key: index,
@@ -349,17 +367,27 @@ var ReviewsContainer = function (_React$Component3) {
 		}
 	}, {
 		key: 'updateSlideQueue',
-		value: function updateSlideQueue(direction) {
+		value: function updateSlideQueue(direction, clicked) {
+			var _this6 = this;
+
 			var incrementUnit = direction === "right" ? 1 : -1;
 			this.setState({
 				increment: this.state.increment + incrementUnit,
 				direction: direction
 			});
+
+			if (clicked && direction === "left") {
+				clearTimeout(this.delaySliding); // clear timeout from previous click
+				clearInterval(this.autoSlide);
+				this.delaySliding = setTimeout(function () {
+					return _this6.autoSlideFunction();
+				}, 2000);
+			}
 		}
 	}, {
 		key: 'render',
 		value: function render() {
-			var _this5 = this;
+			var _this7 = this;
 
 			var queue = this.reviewQueue;
 
@@ -370,14 +398,14 @@ var ReviewsContainer = function (_React$Component3) {
 				React.createElement(
 					'button',
 					{ className: 'arrow-icon right', onClick: function onClick() {
-							return _this5.updateSlideQueue("right");
+							return _this7.updateSlideQueue("right", true);
 						} },
 					React.createElement('img', { src: 'icons/right_arrow.png' })
 				),
 				React.createElement(
 					'button',
 					{ className: 'arrow-icon left', onClick: function onClick() {
-							return _this5.updateSlideQueue("left");
+							return _this7.updateSlideQueue("left", true);
 						} },
 					React.createElement('img', { src: 'icons/left_arrow.png' })
 				)
@@ -531,15 +559,15 @@ var EquipmentSection = function (_React$Component5) {
 	function EquipmentSection(props) {
 		_classCallCheck(this, EquipmentSection);
 
-		var _this7 = _possibleConstructorReturn(this, (EquipmentSection.__proto__ || Object.getPrototypeOf(EquipmentSection)).call(this, props));
+		var _this9 = _possibleConstructorReturn(this, (EquipmentSection.__proto__ || Object.getPrototypeOf(EquipmentSection)).call(this, props));
 
-		_this7.equipmentList = ["treadmills", "bikes", "ellipticals", "strength"];
-		_this7.state = {
+		_this9.equipmentList = ["treadmills", "bikes", "ellipticals", "strength"];
+		_this9.state = {
 			fadeInEquipment: false,
 			equipmentTopPosition: null
 		};
-		_this7.handleScroll = _this7.handleScroll.bind(_this7);
-		return _this7;
+		_this9.handleScroll = _this9.handleScroll.bind(_this9);
+		return _this9;
 	}
 
 	_createClass(EquipmentSection, [{
@@ -601,10 +629,10 @@ var Footer = function (_React$Component6) {
 	function Footer(props) {
 		_classCallCheck(this, Footer);
 
-		var _this8 = _possibleConstructorReturn(this, (Footer.__proto__ || Object.getPrototypeOf(Footer)).call(this, props));
+		var _this10 = _possibleConstructorReturn(this, (Footer.__proto__ || Object.getPrototypeOf(Footer)).call(this, props));
 
-		_this8.mediaList = ["youtube", "pinterest", "facebook", "twitter", "instagram"];
-		return _this8;
+		_this10.mediaList = ["youtube", "pinterest", "facebook", "twitter", "instagram"];
+		return _this10;
 	}
 
 	_createClass(Footer, [{

@@ -164,22 +164,31 @@ class ReviewsContainer extends React.Component {
 		this.state = {
 			increment: 0,
 		}
+		this.updateSlideQueue = this.updateSlideQueue.bind(this)
+		// this.autoSlide = this.autoSlide.bind(this);
 	}	
 	
+	componentDidMount() {
+		this.autoSlideFunction()
+	}
+
+	autoSlideFunction() {
+		this.autoSlide = setInterval(() => this.updateSlideQueue('right'), 4500);
+	}
 
 	buildReviewQueue() {
 		const queue = [];
 		const {increment, direction} = this.state;
 		const length = (Object.keys(this.reviews).length * 3);
 		let index = 0;
-		let k = 1;
+		// let k = 1;
 
 		for (let j = 0; j <= 2; j++) {
 			for (reviewer in this.reviews) {
 				
 				let iUnit = index + increment;
-				if (direction === "left") k = Math.ceil( Math.abs(iUnit / length) );
-				let i = (increment >= 0 ? iUnit : iUnit + length * k) % length;  
+				// if (direction === "left") k = Math.ceil( Math.abs(iUnit / length) );
+				let i = (increment >= 0 ? iUnit : iUnit - length * increment) % length;  
 
 				queue.push(
 					<ReviewCard
@@ -195,13 +204,20 @@ class ReviewsContainer extends React.Component {
 		return queue;
 	}
 
-	
-	updateSlideQueue(direction) {
+	delaySliding = null;
+
+	updateSlideQueue(direction, clicked) {
 		const incrementUnit = direction === "right" ? 1 : -1;
 		this.setState({
 			increment: this.state.increment + incrementUnit,
 			direction: direction
 		})
+
+		if (clicked && direction === "left") {
+			clearTimeout(this.delaySliding); // clear timeout from previous click
+			clearInterval(this.autoSlide);
+			this.delaySliding = setTimeout(() => this.autoSlideFunction(), 2000)
+		}
 	}
 	
 	render() {
@@ -211,10 +227,10 @@ class ReviewsContainer extends React.Component {
 			<div className="reviews-container">
 				{this.buildReviewQueue()}
 					
-				<button className="arrow-icon right" onClick={() => this.updateSlideQueue("right")}>
+				<button className="arrow-icon right" onClick={() => this.updateSlideQueue("right", true)}>
 					<img src="icons/right_arrow.png" />
 				</button>
-				<button className="arrow-icon left" onClick={() => this.updateSlideQueue("left")}>
+				<button className="arrow-icon left" onClick={() => this.updateSlideQueue("left", true)}>
 					<img src="icons/left_arrow.png" />
 				</button>
 			</div>
