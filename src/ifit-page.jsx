@@ -226,7 +226,6 @@ class ReviewsContainer extends React.Component {
 			"gear-junkie": '"You focus on putting in the work, and the technology handles the rest."',
 			"wired": '"Literally transports you from home to wherever you choose to run."',
 		}
-		this.index;
 		this.state = {
 			increment: 0,
 		}
@@ -235,19 +234,24 @@ class ReviewsContainer extends React.Component {
 
 	buildReviewQueue() {
 		const queue = [];
-		let i = 0;
-		this.index = 0;
+		let index = 0;
+		let holdTransition = false;
 		for (let j = 0; j <= 1; j++) {
 			for (reviewer in this.reviews) {
+				let i = (index + this.state.increment) % 6;
+				if (i === 0) {
+					holdTransition: true;
+				}
 				queue.push(
 					<ReviewCard
-						key={this.index} 
-						i={(this.index + this.state.increment) % 6} 
+						key={index} 
+						i={i} 
 						reviewer={reviewer}
 						reviewText={this.reviews[reviewer]}
+						holdTransition={holdTransition}
 						isCardFullScreen={this.props.isCardFullScreen} />)
-				console.log(this.index, this.state.increment)
-				this.index++;
+				console.log(index, this.state.increment)
+				index++;
 			}
 		}
 		return queue;
@@ -255,8 +259,9 @@ class ReviewsContainer extends React.Component {
 
 	
 	updateSlideQueue(direction) {
+		const incrementUnit = direction === "slideRight" ? 1 : -1;
 		this.setState({
-			increment: this.state.increment + 1
+			increment: this.state.increment + incrementUnit,
 		})
 	}
 	
@@ -267,10 +272,10 @@ class ReviewsContainer extends React.Component {
 			<div className="reviews-container">
 				{this.buildReviewQueue()}
 					
-				<button className="arrow-icon right" onClick={() => this.updateSlideQueue("right")}>
+				<button className="arrow-icon right" onClick={() => this.updateSlideQueue("slideRight")}>
 					<img src="icons/right_arrow.png" />
 				</button>
-				<button className="arrow-icon left" onClick={() => this.updateSlideQueue("left")}>
+				<button className="arrow-icon left" onClick={() => this.updateSlideQueue("slideLeft")}>
 					<img src="icons/left_arrow.png" />
 				</button>
 			</div>
@@ -280,12 +285,16 @@ class ReviewsContainer extends React.Component {
 
 class ReviewCard extends React.Component {
 	
+	generateStyle
 
 	render() {
-		console.log(this.props.i)
-		const {i, reviewText, reviewer} = this.props;
+		// console.log(this.props.i)
+
+
+		const {i, reviewText, reviewer, holdTransition} = this.props;
 		return (
-			<div className="review-card" style={this.props.isCardFullScreen ? {minWidth: document.body.clientWidth - 114} : {width: "31%", transform: `translateX(${103.2 * i}%)`}}>
+			<div className="review-card" 
+				style={{width: "31%", transform: `translateX(${103.2 * i}%)`}}>
 				<img className="review-logo" src={`logos/${reviewer}-logo.svg`}/>
 				<div className="review-text">{reviewText + i}</div>
 			</div>

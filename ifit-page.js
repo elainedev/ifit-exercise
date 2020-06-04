@@ -399,7 +399,6 @@ var ReviewsContainer = function (_React$Component4) {
 			"gear-junkie": '"You focus on putting in the work, and the technology handles the rest."',
 			"wired": '"Literally transports you from home to wherever you choose to run."'
 		};
-		_this7.index;
 		_this7.state = {
 			increment: 0
 		};
@@ -410,18 +409,23 @@ var ReviewsContainer = function (_React$Component4) {
 		key: 'buildReviewQueue',
 		value: function buildReviewQueue() {
 			var queue = [];
-			var i = 0;
-			this.index = 0;
+			var index = 0;
+			var holdTransition = false;
 			for (var j = 0; j <= 1; j++) {
 				for (reviewer in this.reviews) {
+					var i = (index + this.state.increment) % 6;
+					if (i === 0) {
+						holdTransition: true;
+					}
 					queue.push(React.createElement(ReviewCard, {
-						key: this.index,
-						i: (this.index + this.state.increment) % 6,
+						key: index,
+						i: i,
 						reviewer: reviewer,
 						reviewText: this.reviews[reviewer],
+						holdTransition: holdTransition,
 						isCardFullScreen: this.props.isCardFullScreen }));
-					console.log(this.index, this.state.increment);
-					this.index++;
+					console.log(index, this.state.increment);
+					index++;
 				}
 			}
 			return queue;
@@ -429,8 +433,9 @@ var ReviewsContainer = function (_React$Component4) {
 	}, {
 		key: 'updateSlideQueue',
 		value: function updateSlideQueue(direction) {
+			var incrementUnit = direction === "slideRight" ? 1 : -1;
 			this.setState({
-				increment: this.state.increment + 1
+				increment: this.state.increment + incrementUnit
 			});
 		}
 	}, {
@@ -447,14 +452,14 @@ var ReviewsContainer = function (_React$Component4) {
 				React.createElement(
 					'button',
 					{ className: 'arrow-icon right', onClick: function onClick() {
-							return _this8.updateSlideQueue("right");
+							return _this8.updateSlideQueue("slideRight");
 						} },
 					React.createElement('img', { src: 'icons/right_arrow.png' })
 				),
 				React.createElement(
 					'button',
 					{ className: 'arrow-icon left', onClick: function onClick() {
-							return _this8.updateSlideQueue("left");
+							return _this8.updateSlideQueue("slideLeft");
 						} },
 					React.createElement('img', { src: 'icons/left_arrow.png' })
 				)
@@ -477,15 +482,19 @@ var ReviewCard = function (_React$Component5) {
 	_createClass(ReviewCard, [{
 		key: 'render',
 		value: function render() {
-			console.log(this.props.i);
+			// console.log(this.props.i)
+
+
 			var _props = this.props,
 			    i = _props.i,
 			    reviewText = _props.reviewText,
-			    reviewer = _props.reviewer;
+			    reviewer = _props.reviewer,
+			    holdTransition = _props.holdTransition;
 
 			return React.createElement(
 				'div',
-				{ className: 'review-card', style: this.props.isCardFullScreen ? { minWidth: document.body.clientWidth - 114 } : { width: "31%", transform: 'translateX(' + 103.2 * i + '%)' } },
+				{ className: 'review-card',
+					style: { width: "31%", transform: 'translateX(' + 103.2 * i + '%)' } },
 				React.createElement('img', { className: 'review-logo', src: 'logos/' + reviewer + '-logo.svg' }),
 				React.createElement(
 					'div',
