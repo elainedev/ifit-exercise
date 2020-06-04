@@ -242,7 +242,7 @@ class ReviewsContainer extends React.Component {
 				queue.push(
 					<ReviewCard
 						key={this.index} 
-						i={this.index + this.state.increment} 
+						i={(this.index + this.state.increment) % 6} 
 						reviewer={reviewer}
 						reviewText={this.reviews[reviewer]}
 						isCardFullScreen={this.props.isCardFullScreen} />)

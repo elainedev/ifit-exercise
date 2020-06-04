@@ -301,6 +301,7 @@ ul {
   position: absolute;
   margin: 0 1%;
   left: calc(-62.5%);
+  transition: transform 1s;
 }
 .review-card .review-logo {
   max-height: 34px;

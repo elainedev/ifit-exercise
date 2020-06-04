@@ -416,7 +416,7 @@ var ReviewsContainer = function (_React$Component4) {
 				for (reviewer in this.reviews) {
 					queue.push(React.createElement(ReviewCard, {
 						key: this.index,
-						i: this.index + this.state.increment,
+						i: (this.index + this.state.increment) % 6,
 						reviewer: reviewer,
 						reviewText: this.reviews[reviewer],
 						isCardFullScreen: this.props.isCardFullScreen }));
