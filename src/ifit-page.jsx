@@ -60,7 +60,7 @@ class IFitPage extends React.Component {
 				</header>
 				<HeroImageSection isBelowCompactNav={showCompactNav} tallerImage={isPhoneSize} />
 				<ReviewsContainer isCardFullScreen={isPhoneSize} isCardHalfScreen={isTabletSize} />
-				<ActivitiesSection />
+				<ActivitiesSection isSmallerScreen={isTabletSize}/>
 				<EquipmentSection />
 				<Footer isPhoneSize={isPhoneSize} />
 			</div>
@@ -285,7 +285,7 @@ class ReviewCard extends React.Component {
 }
 
 
-function ActivitiesSection() {
+function ActivitiesSection(props) {
 	const activitiesData = {
 		0 : {
 			text: "Lake Inniscarra, Ireland--Pyramid",
@@ -326,7 +326,7 @@ function ActivitiesSection() {
 	}
 	return (
 		<div className="activities-section">
-			<ul>
+			<ul className={props.isSmallerScreen ? "smaller-screen" : ""}>
 				{Object.keys(activitiesData).map((activity, i) => 
 					<li key={i}>
 						<div className="img-wrap">

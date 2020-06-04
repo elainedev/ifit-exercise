@@ -83,7 +83,7 @@ var IFitPage = function (_React$Component) {
 				),
 				React.createElement(HeroImageSection, { isBelowCompactNav: showCompactNav, tallerImage: isPhoneSize }),
 				React.createElement(ReviewsContainer, { isCardFullScreen: isPhoneSize, isCardHalfScreen: isTabletSize }),
-				React.createElement(ActivitiesSection, null),
+				React.createElement(ActivitiesSection, { isSmallerScreen: isTabletSize }),
 				React.createElement(EquipmentSection, null),
 				React.createElement(Footer, { isPhoneSize: isPhoneSize })
 			);
@@ -482,7 +482,7 @@ var ReviewCard = function (_React$Component4) {
 	return ReviewCard;
 }(React.Component);
 
-function ActivitiesSection() {
+function ActivitiesSection(props) {
 	var activitiesData = {
 		0: {
 			text: "Lake Inniscarra, Ireland--Pyramid",
@@ -526,7 +526,7 @@ function ActivitiesSection() {
 		{ className: 'activities-section' },
 		React.createElement(
 			'ul',
-			null,
+			{ className: props.isSmallerScreen ? "smaller-screen" : "" },
 			Object.keys(activitiesData).map(function (activity, i) {
 				return React.createElement(
 					'li',

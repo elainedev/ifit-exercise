@@ -270,7 +270,10 @@ ul {
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   grid-column-gap: 30px;
   grid-row-gap: 40px;
-  padding: 3% 10%;
+  padding: 3% 8%;
+}
+.activities-section ul.smaller-screen {
+  padding: 3%;
 }
 .activities-section ul li {
   box-shadow: 0 2px 2px 0 rgba(46, 49, 52, 0.3);
