@@ -410,20 +410,24 @@ var ReviewsContainer = function (_React$Component4) {
 		value: function buildReviewQueue() {
 			var queue = [];
 			var index = 0;
-			var increment = this.state.increment;
+			var _state2 = this.state,
+			    increment = _state2.increment,
+			    direction = _state2.direction;
 
-			for (var j = 0; j <= 1; j++) {
+			var length = Object.keys(this.reviews).length * 3;
+
+			for (var j = 0; j <= 2; j++) {
 				for (reviewer in this.reviews) {
 
-					var iUnit = index + this.state.increment;
-					var i = increment >= 0 ? iUnit % 6 : (iUnit - 6 * increment) % 6; // aka % (Object.keys(this.reviews).length * 2)
-					// if (i < 0) {i }
+					var iUnit = index + increment;
+					var i = (increment >= 0 ? iUnit : iUnit - length * increment) % length;
+
 					queue.push(React.createElement(ReviewCard, {
 						key: index,
 						i: i,
 						reviewer: reviewer,
 						reviewText: this.reviews[reviewer],
-						holdTransition: this.state.direction === "right" ? i === 0 : i === 5,
+						holdTransition: direction === "right" ? i === 0 : i === 8,
 						isCardFullScreen: this.props.isCardFullScreen }));
 					console.log('num', index, 'increment', this.state.increment);
 					index++;
