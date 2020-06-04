@@ -234,15 +234,17 @@ class ReviewsContainer extends React.Component {
 
 	buildReviewQueue() {
 		const queue = [];
-		let index = 0;
 		const {increment, direction} = this.state;
 		const length = (Object.keys(this.reviews).length * 3);
+		let index = 0;
+		let k = 1;
 
 		for (let j = 0; j <= 2; j++) {
 			for (reviewer in this.reviews) {
 				
 				let iUnit = index + increment;
-				let i = (increment >= 0 ? iUnit : iUnit - length * increment) % length;  
+				if (direction === "left") k = Math.ceil( Math.abs(iUnit / length) );
+				let i = (increment >= 0 ? iUnit : iUnit + length * k) % length;  
 
 				queue.push(
 					<ReviewCard
@@ -253,6 +255,7 @@ class ReviewsContainer extends React.Component {
 						holdTransition={direction === "right" ? i === 0 : i === 8}
 						isCardFullScreen={this.props.isCardFullScreen} />)
 				console.log('num', index, 'increment', this.state.increment)
+				console.log('k', k)
 				index++;
 			}
 		}

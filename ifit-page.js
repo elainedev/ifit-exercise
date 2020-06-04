@@ -409,18 +409,20 @@ var ReviewsContainer = function (_React$Component4) {
 		key: 'buildReviewQueue',
 		value: function buildReviewQueue() {
 			var queue = [];
-			var index = 0;
 			var _state2 = this.state,
 			    increment = _state2.increment,
 			    direction = _state2.direction;
 
 			var length = Object.keys(this.reviews).length * 3;
+			var index = 0;
+			var k = 1;
 
 			for (var j = 0; j <= 2; j++) {
 				for (reviewer in this.reviews) {
 
 					var iUnit = index + increment;
-					var i = (increment >= 0 ? iUnit : iUnit - length * increment) % length;
+					if (direction === "left") k = Math.ceil(Math.abs(iUnit / length));
+					var i = (increment >= 0 ? iUnit : iUnit + length * k) % length;
 
 					queue.push(React.createElement(ReviewCard, {
 						key: index,
@@ -430,6 +432,7 @@ var ReviewsContainer = function (_React$Component4) {
 						holdTransition: direction === "right" ? i === 0 : i === 8,
 						isCardFullScreen: this.props.isCardFullScreen }));
 					console.log('num', index, 'increment', this.state.increment);
+					console.log('k', k);
 					index++;
 				}
 			}
