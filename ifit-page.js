@@ -410,19 +410,17 @@ var ReviewsContainer = function (_React$Component4) {
 		value: function buildReviewQueue() {
 			var queue = [];
 			var index = 0;
-			var holdTransition = false;
+			// let holdTransition = false;
 			for (var j = 0; j <= 1; j++) {
 				for (reviewer in this.reviews) {
 					var i = (index + this.state.increment) % 6;
-					if (i === 0) {
-						holdTransition: true;
-					}
+
 					queue.push(React.createElement(ReviewCard, {
 						key: index,
 						i: i,
 						reviewer: reviewer,
 						reviewText: this.reviews[reviewer],
-						holdTransition: holdTransition,
+						holdTransition: i === 0,
 						isCardFullScreen: this.props.isCardFullScreen }));
 					console.log(index, this.state.increment);
 					index++;
@@ -482,8 +480,7 @@ var ReviewCard = function (_React$Component5) {
 	_createClass(ReviewCard, [{
 		key: 'render',
 		value: function render() {
-			// console.log(this.props.i)
-
+			console.log(this.props.holdTransition);
 
 			var _props = this.props,
 			    i = _props.i,
@@ -494,7 +491,11 @@ var ReviewCard = function (_React$Component5) {
 			return React.createElement(
 				'div',
 				{ className: 'review-card',
-					style: { width: "31%", transform: 'translateX(' + 103.2 * i + '%)' } },
+					style: {
+						width: "31%",
+						transform: 'translateX(' + 103.2 * i + '%)',
+						transitionProperty: '' + (holdTransition ? "none" : "")
+					} },
 				React.createElement('img', { className: 'review-logo', src: 'logos/' + reviewer + '-logo.svg' }),
 				React.createElement(
 					'div',

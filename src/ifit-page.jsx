@@ -235,20 +235,18 @@ class ReviewsContainer extends React.Component {
 	buildReviewQueue() {
 		const queue = [];
 		let index = 0;
-		let holdTransition = false;
+		// let holdTransition = false;
 		for (let j = 0; j <= 1; j++) {
 			for (reviewer in this.reviews) {
 				let i = (index + this.state.increment) % 6;
-				if (i === 0) {
-					holdTransition: true;
-				}
+				
 				queue.push(
 					<ReviewCard
 						key={index} 
 						i={i} 
 						reviewer={reviewer}
 						reviewText={this.reviews[reviewer]}
-						holdTransition={holdTransition}
+						holdTransition={i === 0}
 						isCardFullScreen={this.props.isCardFullScreen} />)
 				console.log(index, this.state.increment)
 				index++;
@@ -288,13 +286,17 @@ class ReviewCard extends React.Component {
 	generateStyle
 
 	render() {
-		// console.log(this.props.i)
+		console.log(this.props.holdTransition)
 
 
 		const {i, reviewText, reviewer, holdTransition} = this.props;
 		return (
 			<div className="review-card" 
-				style={{width: "31%", transform: `translateX(${103.2 * i}%)`}}>
+				style={{
+					width: "31%", 
+					transform: `translateX(${103.2 * i}%)`,
+					transitionProperty: `${holdTransition ? "none" : ""}`
+				}}>
 				<img className="review-logo" src={`logos/${reviewer}-logo.svg`}/>
 				<div className="review-text">{reviewText + i}</div>
 			</div>
