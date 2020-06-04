@@ -410,19 +410,22 @@ var ReviewsContainer = function (_React$Component4) {
 		value: function buildReviewQueue() {
 			var queue = [];
 			var index = 0;
-			// let holdTransition = false;
+			var increment = this.state.increment;
+
 			for (var j = 0; j <= 1; j++) {
 				for (reviewer in this.reviews) {
-					var i = (index + this.state.increment) % 6;
 
+					var iUnit = index + this.state.increment;
+					var i = increment >= 0 ? iUnit % 6 : (iUnit - 6 * increment) % 6; // aka % (Object.keys(this.reviews).length * 2)
+					// if (i < 0) {i }
 					queue.push(React.createElement(ReviewCard, {
 						key: index,
 						i: i,
 						reviewer: reviewer,
 						reviewText: this.reviews[reviewer],
-						holdTransition: i === 0,
+						holdTransition: this.state.direction === "right" ? i === 0 : i === 5,
 						isCardFullScreen: this.props.isCardFullScreen }));
-					console.log(index, this.state.increment);
+					console.log('num', index, 'increment', this.state.increment);
 					index++;
 				}
 			}
@@ -431,9 +434,10 @@ var ReviewsContainer = function (_React$Component4) {
 	}, {
 		key: 'updateSlideQueue',
 		value: function updateSlideQueue(direction) {
-			var incrementUnit = direction === "slideRight" ? 1 : -1;
+			var incrementUnit = direction === "right" ? 1 : -1;
 			this.setState({
-				increment: this.state.increment + incrementUnit
+				increment: this.state.increment + incrementUnit,
+				direction: direction
 			});
 		}
 	}, {
@@ -450,14 +454,14 @@ var ReviewsContainer = function (_React$Component4) {
 				React.createElement(
 					'button',
 					{ className: 'arrow-icon right', onClick: function onClick() {
-							return _this8.updateSlideQueue("slideRight");
+							return _this8.updateSlideQueue("right");
 						} },
 					React.createElement('img', { src: 'icons/right_arrow.png' })
 				),
 				React.createElement(
 					'button',
 					{ className: 'arrow-icon left', onClick: function onClick() {
-							return _this8.updateSlideQueue("slideLeft");
+							return _this8.updateSlideQueue("left");
 						} },
 					React.createElement('img', { src: 'icons/left_arrow.png' })
 				)
@@ -480,7 +484,8 @@ var ReviewCard = function (_React$Component5) {
 	_createClass(ReviewCard, [{
 		key: 'render',
 		value: function render() {
-			console.log(this.props.holdTransition);
+			// console.log(this.props.holdTransition)
+
 
 			var _props = this.props,
 			    i = _props.i,

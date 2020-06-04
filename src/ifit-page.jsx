@@ -235,20 +235,23 @@ class ReviewsContainer extends React.Component {
 	buildReviewQueue() {
 		const queue = [];
 		let index = 0;
-		// let holdTransition = false;
+		let increment = this.state.increment;
+
 		for (let j = 0; j <= 1; j++) {
 			for (reviewer in this.reviews) {
-				let i = (index + this.state.increment) % 6;
 				
+				let iUnit = index + this.state.increment;
+				let i = increment >= 0 ? iUnit % 6 : (iUnit - 6 * (increment)) % 6;  // aka % (Object.keys(this.reviews).length * 2)
+				// if (i < 0) {i }
 				queue.push(
 					<ReviewCard
 						key={index} 
 						i={i} 
 						reviewer={reviewer}
 						reviewText={this.reviews[reviewer]}
-						holdTransition={i === 0}
+						holdTransition={this.state.direction === "right" ? i === 0 : i === 5}
 						isCardFullScreen={this.props.isCardFullScreen} />)
-				console.log(index, this.state.increment)
+				console.log('num', index, 'increment', this.state.increment)
 				index++;
 			}
 		}
@@ -257,9 +260,10 @@ class ReviewsContainer extends React.Component {
 
 	
 	updateSlideQueue(direction) {
-		const incrementUnit = direction === "slideRight" ? 1 : -1;
+		const incrementUnit = direction === "right" ? 1 : -1;
 		this.setState({
 			increment: this.state.increment + incrementUnit,
+			direction: direction
 		})
 	}
 	
@@ -270,10 +274,10 @@ class ReviewsContainer extends React.Component {
 			<div className="reviews-container">
 				{this.buildReviewQueue()}
 					
-				<button className="arrow-icon right" onClick={() => this.updateSlideQueue("slideRight")}>
+				<button className="arrow-icon right" onClick={() => this.updateSlideQueue("right")}>
 					<img src="icons/right_arrow.png" />
 				</button>
-				<button className="arrow-icon left" onClick={() => this.updateSlideQueue("slideLeft")}>
+				<button className="arrow-icon left" onClick={() => this.updateSlideQueue("left")}>
 					<img src="icons/left_arrow.png" />
 				</button>
 			</div>
@@ -286,7 +290,7 @@ class ReviewCard extends React.Component {
 	generateStyle
 
 	render() {
-		console.log(this.props.holdTransition)
+		// console.log(this.props.holdTransition)
 
 
 		const {i, reviewText, reviewer, holdTransition} = this.props;
