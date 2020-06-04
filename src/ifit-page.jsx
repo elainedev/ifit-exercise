@@ -44,7 +44,8 @@ class IFitPage extends React.Component {
 
 	render() {
 		const {windowWidth, isHeaderVisible} = this.state;
-		const showCompactNav = windowWidth < this.windowWidthBreakpoints.tablet;
+		const isTabletSize = windowWidth < this.windowWidthBreakpoints.tablet;
+		const showCompactNav = isTabletSize;
 		const isPhoneSize = windowWidth < this.windowWidthBreakpoints.phone;
 
 		return (
@@ -58,7 +59,7 @@ class IFitPage extends React.Component {
 					}
 				</header>
 				<HeroImageSection isBelowCompactNav={showCompactNav} tallerImage={isPhoneSize} />
-				<ReviewsContainer isCardFullScreen={isPhoneSize} />
+				<ReviewsContainer isCardFullScreen={isPhoneSize} isCardHalfScreen={isTabletSize} />
 				<ActivitiesSection />
 				<EquipmentSection />
 				<Footer isPhoneSize={isPhoneSize} />
@@ -169,7 +170,7 @@ class ReviewsContainer extends React.Component {
 	}	
 	
 	componentDidMount() {
-		this.autoSlideFunction()
+		// this.autoSlideFunction()
 	}
 
 	autoSlideFunction() {
@@ -179,15 +180,14 @@ class ReviewsContainer extends React.Component {
 	buildReviewQueue() {
 		const queue = [];
 		const {increment, direction} = this.state;
+		const {isCardFullScreen, isCardHalfScreen} = this.props;
 		const length = (Object.keys(this.reviews).length * 3);
 		let index = 0;
-		// let k = 1;
 
 		for (let j = 0; j <= 2; j++) {
 			for (reviewer in this.reviews) {
 				
 				let iUnit = index + increment;
-				// if (direction === "left") k = Math.ceil( Math.abs(iUnit / length) );
 				let i = (increment >= 0 ? iUnit : iUnit - length * increment) % length;  
 
 				queue.push(
@@ -197,7 +197,9 @@ class ReviewsContainer extends React.Component {
 						reviewer={reviewer}
 						reviewText={this.reviews[reviewer]}
 						holdTransition={direction === "right" ? i === 0 : i === 8}
-						isCardFullScreen={this.props.isCardFullScreen} />)
+						isCardFullScreen={isCardFullScreen}
+						isCardHalfScreen={isCardHalfScreen} 
+					/>)
 				index++;
 			}
 		}
@@ -213,7 +215,7 @@ class ReviewsContainer extends React.Component {
 			direction: direction
 		})
 
-		if (clicked && direction === "left") {
+		if (clicked) {
 			clearTimeout(this.delaySliding); // clear timeout from previous click
 			clearInterval(this.autoSlide);
 			this.delaySliding = setTimeout(() => this.autoSlideFunction(), 2000)
@@ -240,19 +242,43 @@ class ReviewsContainer extends React.Component {
 
 class ReviewCard extends React.Component {
 	
-	generateStyle
+	generateWidth() {
+		if (this.props.isCardFullScreen) {
+			return "90%";
+		}
+		else if (this.props.isCardHalfScreen) {
+			return "45%"
+		}
+		else {
+			return "31%";
+		}
+	}
+
+	generateLeftShift() {
+		if (this.props.isCardFullScreen) {
+			return "-89%";
+		}
+		else if (this.props.isCardHalfScreen) {
+			return "-89.5%";
+		}
+		else {
+			return "-62.5%";
+		}
+	}
 
 	render() {
 		const {i, reviewText, reviewer, holdTransition} = this.props;
+
 		return (
 			<div className="review-card" 
 				style={{
-					width: "31%", 
+					width: this.generateWidth(),
+					left: this.generateLeftShift(),
 					transform: `translateX(${103.2 * i}%)`,
 					transitionProperty: `${holdTransition ? "none" : ""}`
 				}}>
 				<img className="review-logo" src={`logos/${reviewer}-logo.svg`}/>
-				<div className="review-text">{reviewText + i}</div>
+				<div className="review-text">{reviewText}</div>
 			</div>
 		)
 	}

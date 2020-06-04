@@ -64,7 +64,8 @@ var IFitPage = function (_React$Component) {
 			    windowWidth = _state.windowWidth,
 			    isHeaderVisible = _state.isHeaderVisible;
 
-			var showCompactNav = windowWidth < this.windowWidthBreakpoints.tablet;
+			var isTabletSize = windowWidth < this.windowWidthBreakpoints.tablet;
+			var showCompactNav = isTabletSize;
 			var isPhoneSize = windowWidth < this.windowWidthBreakpoints.phone;
 
 			return React.createElement(
@@ -81,7 +82,7 @@ var IFitPage = function (_React$Component) {
 					)
 				),
 				React.createElement(HeroImageSection, { isBelowCompactNav: showCompactNav, tallerImage: isPhoneSize }),
-				React.createElement(ReviewsContainer, { isCardFullScreen: isPhoneSize }),
+				React.createElement(ReviewsContainer, { isCardFullScreen: isPhoneSize, isCardHalfScreen: isTabletSize }),
 				React.createElement(ActivitiesSection, null),
 				React.createElement(EquipmentSection, null),
 				React.createElement(Footer, { isPhoneSize: isPhoneSize })
@@ -323,7 +324,7 @@ var ReviewsContainer = function (_React$Component3) {
 	_createClass(ReviewsContainer, [{
 		key: 'componentDidMount',
 		value: function componentDidMount() {
-			this.autoSlideFunction();
+			// this.autoSlideFunction()
 		}
 	}, {
 		key: 'autoSlideFunction',
@@ -341,16 +342,17 @@ var ReviewsContainer = function (_React$Component3) {
 			var _state2 = this.state,
 			    increment = _state2.increment,
 			    direction = _state2.direction;
+			var _props = this.props,
+			    isCardFullScreen = _props.isCardFullScreen,
+			    isCardHalfScreen = _props.isCardHalfScreen;
 
 			var length = Object.keys(this.reviews).length * 3;
 			var index = 0;
-			// let k = 1;
 
 			for (var j = 0; j <= 2; j++) {
 				for (reviewer in this.reviews) {
 
 					var iUnit = index + increment;
-					// if (direction === "left") k = Math.ceil( Math.abs(iUnit / length) );
 					var i = (increment >= 0 ? iUnit : iUnit - length * increment) % length;
 
 					queue.push(React.createElement(ReviewCard, {
@@ -359,7 +361,9 @@ var ReviewsContainer = function (_React$Component3) {
 						reviewer: reviewer,
 						reviewText: this.reviews[reviewer],
 						holdTransition: direction === "right" ? i === 0 : i === 8,
-						isCardFullScreen: this.props.isCardFullScreen }));
+						isCardFullScreen: isCardFullScreen,
+						isCardHalfScreen: isCardHalfScreen
+					}));
 					index++;
 				}
 			}
@@ -376,7 +380,7 @@ var ReviewsContainer = function (_React$Component3) {
 				direction: direction
 			});
 
-			if (clicked && direction === "left") {
+			if (clicked) {
 				clearTimeout(this.delaySliding); // clear timeout from previous click
 				clearInterval(this.autoSlide);
 				this.delaySliding = setTimeout(function () {
@@ -426,19 +430,43 @@ var ReviewCard = function (_React$Component4) {
 	}
 
 	_createClass(ReviewCard, [{
+		key: 'generateWidth',
+		value: function generateWidth() {
+			if (this.props.isCardFullScreen) {
+				return "90%";
+			} else if (this.props.isCardHalfScreen) {
+				return "45%";
+			} else {
+				return "31%";
+			}
+		}
+	}, {
+		key: 'generateLeftShift',
+		value: function generateLeftShift() {
+			if (this.props.isCardFullScreen) {
+				return "-89%";
+			} else if (this.props.isCardHalfScreen) {
+				return "-89.5%";
+			} else {
+				return "-62.5%";
+			}
+		}
+	}, {
 		key: 'render',
 		value: function render() {
-			var _props = this.props,
-			    i = _props.i,
-			    reviewText = _props.reviewText,
-			    reviewer = _props.reviewer,
-			    holdTransition = _props.holdTransition;
+			var _props2 = this.props,
+			    i = _props2.i,
+			    reviewText = _props2.reviewText,
+			    reviewer = _props2.reviewer,
+			    holdTransition = _props2.holdTransition;
+
 
 			return React.createElement(
 				'div',
 				{ className: 'review-card',
 					style: {
-						width: "31%",
+						width: this.generateWidth(),
+						left: this.generateLeftShift(),
 						transform: 'translateX(' + 103.2 * i + '%)',
 						transitionProperty: '' + (holdTransition ? "none" : "")
 					} },
@@ -446,7 +474,7 @@ var ReviewCard = function (_React$Component4) {
 				React.createElement(
 					'div',
 					{ className: 'review-text' },
-					reviewText + i
+					reviewText
 				)
 			);
 		}
