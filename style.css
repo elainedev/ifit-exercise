@@ -9,6 +9,7 @@ ul {
 
 .ifit-page {
   min-width: 320px;
+  overflow: hidden;
 }
 
 .header-fixed {

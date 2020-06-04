@@ -166,11 +166,10 @@ class ReviewsContainer extends React.Component {
 			increment: 0,
 		}
 		this.updateSlideQueue = this.updateSlideQueue.bind(this)
-		// this.autoSlide = this.autoSlide.bind(this);
 	}	
 	
 	componentDidMount() {
-		// this.autoSlideFunction()
+		this.autoSlideFunction()
 	}
 
 	autoSlideFunction() {

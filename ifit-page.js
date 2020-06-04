@@ -317,14 +317,13 @@ var ReviewsContainer = function (_React$Component3) {
 			increment: 0
 		};
 		_this4.updateSlideQueue = _this4.updateSlideQueue.bind(_this4);
-		// this.autoSlide = this.autoSlide.bind(this);
 		return _this4;
 	}
 
 	_createClass(ReviewsContainer, [{
 		key: 'componentDidMount',
 		value: function componentDidMount() {
-			// this.autoSlideFunction()
+			this.autoSlideFunction();
 		}
 	}, {
 		key: 'autoSlideFunction',
