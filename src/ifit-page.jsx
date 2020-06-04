@@ -152,71 +152,6 @@ function HeroImageSection(props) {
 	)
 }
 
-class ReviewsContainerOld extends React.Component {
-
-	constructor(props) {
-		super(props);
-		this.reviews = {
-			"mashable": '"Breathes new life into a tired, old running routine."',
-			"gear-junkie": '"You focus on putting in the work, and the technology handles the rest."',
-			"wired": '"Literally transports you from home to wherever you choose to run."',
-		}
-		this.reviewQueue = this.buildReviewQueue();
-		this.state = {
-			cardWidth: null,
-			slideDistance: 0,
-		}
-		this.updateSlideQueue = this.updateSlideQueue.bind(this);
-	}
-
-	componentDidMount() {
-		const reviewCard = document.querySelector('.review-card');
-		this.setState({cardWidth : reviewCard.offsetWidth});
-
-		window.addEventListener('resize', () => {
-			this.setState({cardWidth : reviewCard.clientWidth});
-		});
-	}
-	
-
-	buildReviewQueue() {
-		const queue = [];
-		for (let i = 0; i <= 1; i++) {
-			for (reviewer in this.reviews) {
-				queue.push(<ReviewCard key={`${reviewer}-${i}`} reviewer={reviewer} reviewText={this.reviews[reviewer]} isCardFullScreen={this.props.isCardFullScreen} />)
-			}
-		}
-		return queue;
-	}
-
-	updateSlideQueue(direction) {
-		let slideUnit = this.state.cardWidth + 22;
-		direction === "right" ? slideUnit = 0 - slideUnit : slideUnit;
-		this.setState({slideDistance: this.state.slideDistance += slideUnit})
-	}
-
-	render() {
-		const queue = this.reviewQueue;
-
-		return (
-			<div className={`reviews-container ${this.props.isCardFullScreen ? 'full-screen' : ''}`}>
-				<div className="sliding-container" 
-					style={{transform: `translateX(${this.state.slideDistance}px)`, transition:'transform 1s'}}>
-				
-					{this.buildReviewQueue()}
-					
-				</div>
-				<button className="arrow-icon right" onClick={() => this.updateSlideQueue('right')}>
-					<img src="icons/right_arrow.png" />
-				</button>
-				<button className="arrow-icon left" onClick={() => this.updateSlideQueue('left')}>
-					<img src="icons/left_arrow.png" />
-				</button>
-			</div>
-		)
-	} 
-}
-
 class ReviewsContainer extends React.Component {
 
 	constructor(props) {
@@ -254,8 +189,6 @@ class ReviewsContainer extends React.Component {
 						reviewText={this.reviews[reviewer]}
 						holdTransition={direction === "right" ? i === 0 : i === 8}
 						isCardFullScreen={this.props.isCardFullScreen} />)
-				console.log('num', index, 'increment', this.state.increment)
-				console.log('k', k)
 				index++;
 			}
 		}
@@ -294,9 +227,6 @@ class ReviewCard extends React.Component {
 	generateStyle
 
 	render() {
-		// console.log(this.props.holdTransition)
-
-
 		const {i, reviewText, reviewer, holdTransition} = this.props;
 		return (
 			<div className="review-card" 

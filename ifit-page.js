@@ -297,112 +297,23 @@ function HeroImageSection(props) {
 	);
 }
 
-var ReviewsContainerOld = function (_React$Component3) {
-	_inherits(ReviewsContainerOld, _React$Component3);
+var ReviewsContainer = function (_React$Component3) {
+	_inherits(ReviewsContainer, _React$Component3);
 
-	function ReviewsContainerOld(props) {
-		_classCallCheck(this, ReviewsContainerOld);
+	function ReviewsContainer(props) {
+		_classCallCheck(this, ReviewsContainer);
 
-		var _this4 = _possibleConstructorReturn(this, (ReviewsContainerOld.__proto__ || Object.getPrototypeOf(ReviewsContainerOld)).call(this, props));
+		var _this4 = _possibleConstructorReturn(this, (ReviewsContainer.__proto__ || Object.getPrototypeOf(ReviewsContainer)).call(this, props));
 
 		_this4.reviews = {
 			"mashable": '"Breathes new life into a tired, old running routine."',
 			"gear-junkie": '"You focus on putting in the work, and the technology handles the rest."',
 			"wired": '"Literally transports you from home to wherever you choose to run."'
 		};
-		_this4.reviewQueue = _this4.buildReviewQueue();
 		_this4.state = {
-			cardWidth: null,
-			slideDistance: 0
-		};
-		_this4.updateSlideQueue = _this4.updateSlideQueue.bind(_this4);
-		return _this4;
-	}
-
-	_createClass(ReviewsContainerOld, [{
-		key: 'componentDidMount',
-		value: function componentDidMount() {
-			var _this5 = this;
-
-			var reviewCard = document.querySelector('.review-card');
-			this.setState({ cardWidth: reviewCard.offsetWidth });
-
-			window.addEventListener('resize', function () {
-				_this5.setState({ cardWidth: reviewCard.clientWidth });
-			});
-		}
-	}, {
-		key: 'buildReviewQueue',
-		value: function buildReviewQueue() {
-			var queue = [];
-			for (var i = 0; i <= 1; i++) {
-				for (reviewer in this.reviews) {
-					queue.push(React.createElement(ReviewCard, { key: reviewer + '-' + i, reviewer: reviewer, reviewText: this.reviews[reviewer], isCardFullScreen: this.props.isCardFullScreen }));
-				}
-			}
-			return queue;
-		}
-	}, {
-		key: 'updateSlideQueue',
-		value: function updateSlideQueue(direction) {
-			var slideUnit = this.state.cardWidth + 22;
-			direction === "right" ? slideUnit = 0 - slideUnit : slideUnit;
-			this.setState({ slideDistance: this.state.slideDistance += slideUnit });
-		}
-	}, {
-		key: 'render',
-		value: function render() {
-			var _this6 = this;
-
-			var queue = this.reviewQueue;
-
-			return React.createElement(
-				'div',
-				{ className: 'reviews-container ' + (this.props.isCardFullScreen ? 'full-screen' : '') },
-				React.createElement(
-					'div',
-					{ className: 'sliding-container',
-						style: { transform: 'translateX(' + this.state.slideDistance + 'px)', transition: 'transform 1s' } },
-					this.buildReviewQueue()
-				),
-				React.createElement(
-					'button',
-					{ className: 'arrow-icon right', onClick: function onClick() {
-							return _this6.updateSlideQueue('right');
-						} },
-					React.createElement('img', { src: 'icons/right_arrow.png' })
-				),
-				React.createElement(
-					'button',
-					{ className: 'arrow-icon left', onClick: function onClick() {
-							return _this6.updateSlideQueue('left');
-						} },
-					React.createElement('img', { src: 'icons/left_arrow.png' })
-				)
-			);
-		}
-	}]);
-
-	return ReviewsContainerOld;
-}(React.Component);
-
-var ReviewsContainer = function (_React$Component4) {
-	_inherits(ReviewsContainer, _React$Component4);
-
-	function ReviewsContainer(props) {
-		_classCallCheck(this, ReviewsContainer);
-
-		var _this7 = _possibleConstructorReturn(this, (ReviewsContainer.__proto__ || Object.getPrototypeOf(ReviewsContainer)).call(this, props));
-
-		_this7.reviews = {
-			"mashable": '"Breathes new life into a tired, old running routine."',
-			"gear-junkie": '"You focus on putting in the work, and the technology handles the rest."',
-			"wired": '"Literally transports you from home to wherever you choose to run."'
-		};
-		_this7.state = {
 			increment: 0
 		};
-		return _this7;
+		return _this4;
 	}
 
 	_createClass(ReviewsContainer, [{
@@ -431,8 +342,6 @@ var ReviewsContainer = function (_React$Component4) {
 						reviewText: this.reviews[reviewer],
 						holdTransition: direction === "right" ? i === 0 : i === 8,
 						isCardFullScreen: this.props.isCardFullScreen }));
-					console.log('num', index, 'increment', this.state.increment);
-					console.log('k', k);
 					index++;
 				}
 			}
@@ -450,7 +359,7 @@ var ReviewsContainer = function (_React$Component4) {
 	}, {
 		key: 'render',
 		value: function render() {
-			var _this8 = this;
+			var _this5 = this;
 
 			var queue = this.reviewQueue;
 
@@ -461,14 +370,14 @@ var ReviewsContainer = function (_React$Component4) {
 				React.createElement(
 					'button',
 					{ className: 'arrow-icon right', onClick: function onClick() {
-							return _this8.updateSlideQueue("right");
+							return _this5.updateSlideQueue("right");
 						} },
 					React.createElement('img', { src: 'icons/right_arrow.png' })
 				),
 				React.createElement(
 					'button',
 					{ className: 'arrow-icon left', onClick: function onClick() {
-							return _this8.updateSlideQueue("left");
+							return _this5.updateSlideQueue("left");
 						} },
 					React.createElement('img', { src: 'icons/left_arrow.png' })
 				)
@@ -479,8 +388,8 @@ var ReviewsContainer = function (_React$Component4) {
 	return ReviewsContainer;
 }(React.Component);
 
-var ReviewCard = function (_React$Component5) {
-	_inherits(ReviewCard, _React$Component5);
+var ReviewCard = function (_React$Component4) {
+	_inherits(ReviewCard, _React$Component4);
 
 	function ReviewCard() {
 		_classCallCheck(this, ReviewCard);
@@ -491,9 +400,6 @@ var ReviewCard = function (_React$Component5) {
 	_createClass(ReviewCard, [{
 		key: 'render',
 		value: function render() {
-			// console.log(this.props.holdTransition)
-
-
 			var _props = this.props,
 			    i = _props.i,
 			    reviewText = _props.reviewText,
@@ -619,21 +525,21 @@ function ActivitiesSection() {
 	);
 }
 
-var EquipmentSection = function (_React$Component6) {
-	_inherits(EquipmentSection, _React$Component6);
+var EquipmentSection = function (_React$Component5) {
+	_inherits(EquipmentSection, _React$Component5);
 
 	function EquipmentSection(props) {
 		_classCallCheck(this, EquipmentSection);
 
-		var _this10 = _possibleConstructorReturn(this, (EquipmentSection.__proto__ || Object.getPrototypeOf(EquipmentSection)).call(this, props));
+		var _this7 = _possibleConstructorReturn(this, (EquipmentSection.__proto__ || Object.getPrototypeOf(EquipmentSection)).call(this, props));
 
-		_this10.equipmentList = ["treadmills", "bikes", "ellipticals", "strength"];
-		_this10.state = {
+		_this7.equipmentList = ["treadmills", "bikes", "ellipticals", "strength"];
+		_this7.state = {
 			fadeInEquipment: false,
 			equipmentTopPosition: null
 		};
-		_this10.handleScroll = _this10.handleScroll.bind(_this10);
-		return _this10;
+		_this7.handleScroll = _this7.handleScroll.bind(_this7);
+		return _this7;
 	}
 
 	_createClass(EquipmentSection, [{
@@ -689,16 +595,16 @@ var EquipmentSection = function (_React$Component6) {
 	return EquipmentSection;
 }(React.Component);
 
-var Footer = function (_React$Component7) {
-	_inherits(Footer, _React$Component7);
+var Footer = function (_React$Component6) {
+	_inherits(Footer, _React$Component6);
 
 	function Footer(props) {
 		_classCallCheck(this, Footer);
 
-		var _this11 = _possibleConstructorReturn(this, (Footer.__proto__ || Object.getPrototypeOf(Footer)).call(this, props));
+		var _this8 = _possibleConstructorReturn(this, (Footer.__proto__ || Object.getPrototypeOf(Footer)).call(this, props));
 
-		_this11.mediaList = ["youtube", "pinterest", "facebook", "twitter", "instagram"];
-		return _this11;
+		_this8.mediaList = ["youtube", "pinterest", "facebook", "twitter", "instagram"];
+		return _this8;
 	}
 
 	_createClass(Footer, [{
