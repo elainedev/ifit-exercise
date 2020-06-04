@@ -10,7 +10,6 @@ class IFitPage extends React.Component {
 
 		this.state = {
 			windowWidth: document.body.clientWidth,
-			heroBottomPosition: null,
 			isHeaderVisible: true,
 		};
 		this.handleScroll = this.handleScroll.bind(this);
@@ -153,7 +152,7 @@ function HeroImageSection(props) {
 	)
 }
 
-class ReviewsContainer extends React.Component {
+class ReviewsContainerOld extends React.Component {
 
 	constructor(props) {
 		super(props);
@@ -218,13 +217,81 @@ class ReviewsContainer extends React.Component {
 	} 
 }
 
-function ReviewCard(props) {
-	return (
-		<div className="review-card" style={props.isCardFullScreen ? {minWidth: document.body.clientWidth - 114} : {}}>
-			<img className="review-logo" src={`logos/${props.reviewer}-logo.svg`}/>
-			<div className="review-text">{props.reviewText}</div>
-		</div>
-	)
+class ReviewsContainer extends React.Component {
+
+	constructor(props) {
+		super(props);
+		this.reviews = {
+			"mashable": '"Breathes new life into a tired, old running routine."',
+			"gear-junkie": '"You focus on putting in the work, and the technology handles the rest."',
+			"wired": '"Literally transports you from home to wherever you choose to run."',
+		}
+		this.index;
+		this.state = {
+			increment: 0,
+		}
+	}	
+	
+
+	buildReviewQueue() {
+		const queue = [];
+		let i = 0;
+		this.index = 0;
+		for (let j = 0; j <= 1; j++) {
+			for (reviewer in this.reviews) {
+				queue.push(
+					<ReviewCard
+						key={this.index} 
+						i={this.index + this.state.increment} 
+						reviewer={reviewer}
+						reviewText={this.reviews[reviewer]}
+						isCardFullScreen={this.props.isCardFullScreen} />)
+				console.log(this.index, this.state.increment)
+				this.index++;
+			}
+		}
+		return queue;
+	}
+
+	
+	updateSlideQueue(direction) {
+		this.setState({
+			increment: this.state.increment + 1
+		})
+	}
+	
+	render() {
+		const queue = this.reviewQueue;
+
+		return (
+			<div className="reviews-container">
+				{this.buildReviewQueue()}
+					
+				<button className="arrow-icon right" onClick={() => this.updateSlideQueue("right")}>
+					<img src="icons/right_arrow.png" />
+				</button>
+				<button className="arrow-icon left" onClick={() => this.updateSlideQueue("left")}>
+					<img src="icons/left_arrow.png" />
+				</button>
+			</div>
+		)
+	} 
+}
+
+class ReviewCard extends React.Component {
+	
+
+	render() {
+		console.log(this.props.i)
+		const {i, reviewText, reviewer} = this.props;
+		return (
+			<div className="review-card" style={this.props.isCardFullScreen ? {minWidth: document.body.clientWidth - 114} : {width: "31%", transform: `translateX(${103.2 * i}%)`}}>
+				<img className="review-logo" src={`logos/${reviewer}-logo.svg`}/>
+				<div className="review-text">{reviewText + i}</div>
+			</div>
+		)
+	}
+
 }
 
 

@@ -21,7 +21,6 @@ var IFitPage = function (_React$Component) {
 
 		_this.state = {
 			windowWidth: document.body.clientWidth,
-			heroBottomPosition: null,
 			isHeaderVisible: true
 		};
 		_this.handleScroll = _this.handleScroll.bind(_this);
@@ -298,13 +297,13 @@ function HeroImageSection(props) {
 	);
 }
 
-var ReviewsContainer = function (_React$Component3) {
-	_inherits(ReviewsContainer, _React$Component3);
+var ReviewsContainerOld = function (_React$Component3) {
+	_inherits(ReviewsContainerOld, _React$Component3);
 
-	function ReviewsContainer(props) {
-		_classCallCheck(this, ReviewsContainer);
+	function ReviewsContainerOld(props) {
+		_classCallCheck(this, ReviewsContainerOld);
 
-		var _this4 = _possibleConstructorReturn(this, (ReviewsContainer.__proto__ || Object.getPrototypeOf(ReviewsContainer)).call(this, props));
+		var _this4 = _possibleConstructorReturn(this, (ReviewsContainerOld.__proto__ || Object.getPrototypeOf(ReviewsContainerOld)).call(this, props));
 
 		_this4.reviews = {
 			"mashable": '"Breathes new life into a tired, old running routine."',
@@ -320,7 +319,7 @@ var ReviewsContainer = function (_React$Component3) {
 		return _this4;
 	}
 
-	_createClass(ReviewsContainer, [{
+	_createClass(ReviewsContainerOld, [{
 		key: 'componentDidMount',
 		value: function componentDidMount() {
 			var _this5 = this;
@@ -384,21 +383,121 @@ var ReviewsContainer = function (_React$Component3) {
 		}
 	}]);
 
+	return ReviewsContainerOld;
+}(React.Component);
+
+var ReviewsContainer = function (_React$Component4) {
+	_inherits(ReviewsContainer, _React$Component4);
+
+	function ReviewsContainer(props) {
+		_classCallCheck(this, ReviewsContainer);
+
+		var _this7 = _possibleConstructorReturn(this, (ReviewsContainer.__proto__ || Object.getPrototypeOf(ReviewsContainer)).call(this, props));
+
+		_this7.reviews = {
+			"mashable": '"Breathes new life into a tired, old running routine."',
+			"gear-junkie": '"You focus on putting in the work, and the technology handles the rest."',
+			"wired": '"Literally transports you from home to wherever you choose to run."'
+		};
+		_this7.index;
+		_this7.state = {
+			increment: 0
+		};
+		return _this7;
+	}
+
+	_createClass(ReviewsContainer, [{
+		key: 'buildReviewQueue',
+		value: function buildReviewQueue() {
+			var queue = [];
+			var i = 0;
+			this.index = 0;
+			for (var j = 0; j <= 1; j++) {
+				for (reviewer in this.reviews) {
+					queue.push(React.createElement(ReviewCard, {
+						key: this.index,
+						i: this.index + this.state.increment,
+						reviewer: reviewer,
+						reviewText: this.reviews[reviewer],
+						isCardFullScreen: this.props.isCardFullScreen }));
+					console.log(this.index, this.state.increment);
+					this.index++;
+				}
+			}
+			return queue;
+		}
+	}, {
+		key: 'updateSlideQueue',
+		value: function updateSlideQueue(direction) {
+			this.setState({
+				increment: this.state.increment + 1
+			});
+		}
+	}, {
+		key: 'render',
+		value: function render() {
+			var _this8 = this;
+
+			var queue = this.reviewQueue;
+
+			return React.createElement(
+				'div',
+				{ className: 'reviews-container' },
+				this.buildReviewQueue(),
+				React.createElement(
+					'button',
+					{ className: 'arrow-icon right', onClick: function onClick() {
+							return _this8.updateSlideQueue("right");
+						} },
+					React.createElement('img', { src: 'icons/right_arrow.png' })
+				),
+				React.createElement(
+					'button',
+					{ className: 'arrow-icon left', onClick: function onClick() {
+							return _this8.updateSlideQueue("left");
+						} },
+					React.createElement('img', { src: 'icons/left_arrow.png' })
+				)
+			);
+		}
+	}]);
+
 	return ReviewsContainer;
 }(React.Component);
 
-function ReviewCard(props) {
-	return React.createElement(
-		'div',
-		{ className: 'review-card', style: props.isCardFullScreen ? { minWidth: document.body.clientWidth - 114 } : {} },
-		React.createElement('img', { className: 'review-logo', src: 'logos/' + props.reviewer + '-logo.svg' }),
-		React.createElement(
-			'div',
-			{ className: 'review-text' },
-			props.reviewText
-		)
-	);
-}
+var ReviewCard = function (_React$Component5) {
+	_inherits(ReviewCard, _React$Component5);
+
+	function ReviewCard() {
+		_classCallCheck(this, ReviewCard);
+
+		return _possibleConstructorReturn(this, (ReviewCard.__proto__ || Object.getPrototypeOf(ReviewCard)).apply(this, arguments));
+	}
+
+	_createClass(ReviewCard, [{
+		key: 'render',
+		value: function render() {
+			console.log(this.props.i);
+			var _props = this.props,
+			    i = _props.i,
+			    reviewText = _props.reviewText,
+			    reviewer = _props.reviewer;
+
+			return React.createElement(
+				'div',
+				{ className: 'review-card', style: this.props.isCardFullScreen ? { minWidth: document.body.clientWidth - 114 } : { width: "31%", transform: 'translateX(' + 103.2 * i + '%)' } },
+				React.createElement('img', { className: 'review-logo', src: 'logos/' + reviewer + '-logo.svg' }),
+				React.createElement(
+					'div',
+					{ className: 'review-text' },
+					reviewText + i
+				)
+			);
+		}
+	}]);
+
+	return ReviewCard;
+}(React.Component);
 
 function ActivitiesSection() {
 	var activitiesData = {
@@ -498,21 +597,21 @@ function ActivitiesSection() {
 	);
 }
 
-var EquipmentSection = function (_React$Component4) {
-	_inherits(EquipmentSection, _React$Component4);
+var EquipmentSection = function (_React$Component6) {
+	_inherits(EquipmentSection, _React$Component6);
 
 	function EquipmentSection(props) {
 		_classCallCheck(this, EquipmentSection);
 
-		var _this7 = _possibleConstructorReturn(this, (EquipmentSection.__proto__ || Object.getPrototypeOf(EquipmentSection)).call(this, props));
+		var _this10 = _possibleConstructorReturn(this, (EquipmentSection.__proto__ || Object.getPrototypeOf(EquipmentSection)).call(this, props));
 
-		_this7.equipmentList = ["treadmills", "bikes", "ellipticals", "strength"];
-		_this7.state = {
+		_this10.equipmentList = ["treadmills", "bikes", "ellipticals", "strength"];
+		_this10.state = {
 			fadeInEquipment: false,
 			equipmentTopPosition: null
 		};
-		_this7.handleScroll = _this7.handleScroll.bind(_this7);
-		return _this7;
+		_this10.handleScroll = _this10.handleScroll.bind(_this10);
+		return _this10;
 	}
 
 	_createClass(EquipmentSection, [{
@@ -568,16 +667,16 @@ var EquipmentSection = function (_React$Component4) {
 	return EquipmentSection;
 }(React.Component);
 
-var Footer = function (_React$Component5) {
-	_inherits(Footer, _React$Component5);
+var Footer = function (_React$Component7) {
+	_inherits(Footer, _React$Component7);
 
 	function Footer(props) {
 		_classCallCheck(this, Footer);
 
-		var _this8 = _possibleConstructorReturn(this, (Footer.__proto__ || Object.getPrototypeOf(Footer)).call(this, props));
+		var _this11 = _possibleConstructorReturn(this, (Footer.__proto__ || Object.getPrototypeOf(Footer)).call(this, props));
 
-		_this8.mediaList = ["youtube", "pinterest", "facebook", "twitter", "instagram"];
-		return _this8;
+		_this11.mediaList = ["youtube", "pinterest", "facebook", "twitter", "instagram"];
+		return _this11;
 	}
 
 	_createClass(Footer, [{
