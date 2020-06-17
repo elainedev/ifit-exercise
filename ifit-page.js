@@ -590,8 +590,7 @@ var EquipmentSection = function (_React$Component5) {
 
 		_this9.equipmentList = ["treadmills", "bikes", "ellipticals", "strength"];
 		_this9.state = {
-			fadeInEquipment: false,
-			equipmentTopPosition: null
+			fadeInEquipment: false
 		};
 		_this9.handleScroll = _this9.handleScroll.bind(_this9);
 		return _this9;
@@ -600,20 +599,15 @@ var EquipmentSection = function (_React$Component5) {
 	_createClass(EquipmentSection, [{
 		key: 'componentDidMount',
 		value: function componentDidMount() {
-			var equipmentBlock = document.getElementById('scroll-to-equipment');
-
-			this.setState({
-				equipmentTopPosition: equipmentBlock.getBoundingClientRect().top
-
-			});
-
 			window.addEventListener('scroll', this.handleScroll);
 		}
 	}, {
 		key: 'handleScroll',
 		value: function handleScroll() {
-			// const currentScrollPos = window.pageYOffset;
-			var fadeInEquipment = window.innerHeight - this.state.equipmentTopPosition <= 0;
+			var equipmentBlock = document.getElementById('scroll-to-equipment');
+			var equipmentTopPosition = equipmentBlock.getBoundingClientRect().top;
+
+			var fadeInEquipment = window.pageYOffset > equipmentTopPosition;
 			this.setState({ fadeInEquipment: fadeInEquipment });
 		}
 	}, {
@@ -629,7 +623,7 @@ var EquipmentSection = function (_React$Component5) {
 				),
 				React.createElement(
 					'ul',
-					{ id: 'scroll-to-equipment', className: this.state.fadeInEquipment ? "fade-in" : "default" },
+					{ id: 'scroll-to-equipment', className: this.state.fadeInEquipment ? "fade-in" : "hidden" },
 					this.equipmentList.map(function (equipment) {
 						return React.createElement(
 							'li',

@@ -4,9 +4,9 @@ class IFitPage extends React.Component {
 		super(props);
 
 		this.windowWidthBreakpoints = {
-	      tablet: 760,
-	      phone: 480,
-	    };
+			tablet: 760,
+			phone: 480,
+		};
 
 		this.state = {
 			windowWidth: document.body.clientWidth,
@@ -369,27 +369,20 @@ class EquipmentSection extends React.Component {
 		this.equipmentList = ["treadmills", "bikes", "ellipticals", "strength"];
 		this.state = {
 			fadeInEquipment: false,
-			equipmentTopPosition: null
 		}
 		this.handleScroll = this.handleScroll.bind(this);
 	}
 	
 
 	componentDidMount() {
-		const equipmentBlock = document.getElementById('scroll-to-equipment');
-
-		this.setState({
-			equipmentTopPosition: equipmentBlock.getBoundingClientRect().top
-
-		});
-
 		window.addEventListener('scroll', this.handleScroll);
-
 	}
 
 	handleScroll() {
-		// const currentScrollPos = window.pageYOffset;
-		const fadeInEquipment = window.innerHeight - this.state.equipmentTopPosition <= 0;
+		const equipmentBlock = document.getElementById('scroll-to-equipment');
+		const equipmentTopPosition = equipmentBlock.getBoundingClientRect().top;
+		
+		const fadeInEquipment = window.pageYOffset > equipmentTopPosition;
 		this.setState({fadeInEquipment})
 	}
 
@@ -397,7 +390,7 @@ class EquipmentSection extends React.Component {
 		return (
 			<div className="equipment-section">
 				<div className="equipment-question">Interested in our exciting iFit-enabled equipment?</div>
-				<ul id="scroll-to-equipment" className={this.state.fadeInEquipment ? "fade-in" : "default"}>
+				<ul id="scroll-to-equipment" className={this.state.fadeInEquipment ? "fade-in" : "hidden"}>
 					{
 						this.equipmentList.map(equipment => 
 							<li key={equipment}>
